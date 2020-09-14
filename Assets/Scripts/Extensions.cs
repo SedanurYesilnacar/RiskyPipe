@@ -27,5 +27,10 @@ namespace RiskyPipe3D
             }
             return pipe;
         }
+
+        public static Trap GetRandomTrap(this List<Trap> traps)
+        {
+            return traps[new Random().Next(traps.Count)];
+        }
     }
 }

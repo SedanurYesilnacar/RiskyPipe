@@ -12,7 +12,7 @@ namespace RiskyPipe3D
         MidLeftPipe,
         MidNormalPipe,
     }
-    public class Pipe : MonoBehaviour
+    public class Pipe : LevelObject
     {
         [SerializeField]
         private PipeType _type;
@@ -21,36 +21,36 @@ namespace RiskyPipe3D
         [SerializeField]
         bool _isMid;
 
+        
+        
         public bool IsMid { get => _isMid;}
         public PipeType Type { get => _type;}
         public Transform EndPosition { get => _endPosition;}
 
-        public void SetObject(Pipe before = null)
+        private Pipe(PipeType pipeType, Transform endPosition)
         {
-            if(before == null)
+            _type = pipeType;
+            _endPosition = endPosition;
+        }
+
+        override
+        public void SetObject(LevelObject before = null)
+        {
+            if(before != null)
             {
+                Pipe beforePipe = before as Pipe;
+                transform.position = beforePipe.EndPosition.position;
+                if (beforePipe.Type == PipeType.MidRightPipe || beforePipe.Type == PipeType.MidLeftPipe)
+                    transform.localEulerAngles = new Vector3(90, before.transform.localScale.x * 90 + before.transform.localEulerAngles.y, 0);
+                else
+                    transform.localEulerAngles = before.transform.localEulerAngles;
 
+                Debug.Log( "This Pipe Has "+transform.childCount + " Child");
             }
-            else
-            {
-                transform.position = before.EndPosition.position;
-            }
+          
         }
 
-        private void Start()
-        {
-            Deactive();
-        }
-
-        public void Active()
-        {
-            gameObject.SetActive(true);
-        }
-
-        public void Deactive()
-        {
-            gameObject.SetActive(false);
-        }
+  
     }
 }
 

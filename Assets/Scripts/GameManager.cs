@@ -11,7 +11,7 @@ namespace RiskyPipe3D
         private void Awake()
         {
             _levelFactory = new LevelFactory();
-            _level = _levelFactory.GetNewLevel(10);
+            _level = _levelFactory.GetNewLevel(1000);
             _level.LoadLevel();
             _level.StartLevel();
         }

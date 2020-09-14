@@ -4,26 +4,26 @@ namespace RiskyPipe3D
 {
     public class Level
     {
-        public List<Pipe> Pipes { get; private set; }
+        public List<LevelObject> LevelObjects { get; private set; }
 
-        public Level(List<Pipe> pipes)
+        public Level(List<LevelObject> levelObjects)
         {
-            Pipes = pipes;
+            LevelObjects = levelObjects;
         }
 
         public void LoadLevel()
         {
-            if (Pipes.Count < 2) return;
-            Pipes[0].SetObject();
-            for(int i = 1; i< Pipes.Count; i++)
+            if (LevelObjects.Count < 2) return;
+            LevelObjects[0].SetObject();
+            for(int i = 1; i< LevelObjects.Count; i++)
             {
-                Pipes[i].SetObject(Pipes[i - 1]);
+                LevelObjects[i].SetObject(LevelObjects[i - 1]);
             }
         }
 
         public void EndLevel()
         {
-            foreach(Pipe p in Pipes)
+            foreach(LevelObject p in LevelObjects)
             {
                 p.Deactive();
             }
@@ -31,7 +31,7 @@ namespace RiskyPipe3D
 
         public void StartLevel()
         {
-            foreach(Pipe p in Pipes)
+            foreach(LevelObject p in LevelObjects)
             {
                 p.Active();
             }
