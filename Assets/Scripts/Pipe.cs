@@ -41,9 +41,9 @@ namespace RiskyPipe3D
                 Pipe beforePipe = before as Pipe;
                 transform.position = beforePipe.EndPosition.position;
                 if (beforePipe.Type == PipeType.MidRightPipe || beforePipe.Type == PipeType.MidLeftPipe)
-                    transform.localEulerAngles = new Vector3(90, before.transform.localScale.x * 90 + before.transform.localEulerAngles.y, 0);
+                    transform.localEulerAngles = new Vector3(90, beforePipe.transform.localScale.x * 90 + beforePipe.transform.localEulerAngles.y, 0);
                 else
-                    transform.localEulerAngles = before.transform.localEulerAngles;
+                    transform.localEulerAngles = beforePipe.transform.localEulerAngles;
 
                 Debug.Log( "This Pipe Has "+transform.childCount + " Child");
             }

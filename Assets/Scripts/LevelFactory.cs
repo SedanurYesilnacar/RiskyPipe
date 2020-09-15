@@ -73,7 +73,7 @@ namespace RiskyPipe3D
                 //Bu region içinde boru yönünün sağa mı yoksa sola mı gideceğini karar veren logic var.
                 #region Direction Choosing
                 Direction direction = GetRandomDirection();
-                if (direction == Direction.Left && hasMadeLeftCount < maxReturnCount)
+                if (direction == Direction.Left)
                 {
                     if(hasMadeLeftCount < maxReturnCount)
                     {
@@ -112,12 +112,12 @@ namespace RiskyPipe3D
                 //Sağ veya sol yönelime karar verilen boruların devamında gelecek düz boruların eklendiği region.
                 #region Continious Pipes
                 randomPipeCount = (byte)Random.Range(6, 11);
-                byte trapStartIndex = (byte)Random.Range(randomPipeCount, 12);
+                byte trapStartIndex = (byte)Random.Range(2, randomPipeCount - 1);
                 for (byte i = 0; i < randomPipeCount; i++)
                 {
                     GameObject gameObject = MonoBehaviour.Instantiate(Pipes.GetPipe(PipeType.NormalPipe).gameObject);
                     pipes.Add(gameObject.GetComponent<Pipe>());
-                    if(trapStartIndex-randomPipeCount == i)
+                    if(trapStartIndex == i)
                     {
                         GameObject trapObj = MonoBehaviour.Instantiate(Traps.GetRandomTrap().gameObject, gameObject.transform);
                         traps.Add(trapObj.GetComponent<Trap>());
