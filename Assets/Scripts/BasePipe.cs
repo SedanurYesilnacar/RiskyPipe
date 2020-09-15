@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using RiskyPipe3D.GameDynamics;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 namespace RiskyPipe3D
@@ -12,20 +13,13 @@ namespace RiskyPipe3D
         MidLeftPipe,
         MidNormalPipe,
     }
-    public class Pipe : MonoBehaviour
+    public class BasePipe : MonoBehaviour
     {
         [SerializeField]
-        private PipeType _type;
-        [SerializeField]
         private Transform _endPosition;
-        [SerializeField]
-        bool _isMid;
-
-        public bool IsMid { get => _isMid;}
-        public PipeType Type { get => _type;}
         public Transform EndPosition { get => _endPosition;}
 
-        public void SetObject(Pipe before = null)
+        public void SetObject(BasePipe before = null)
         {
             if(before == null)
             {
@@ -39,7 +33,7 @@ namespace RiskyPipe3D
 
         private void Start()
         {
-            Deactive();
+            //Deactive();
         }
 
         public void Active()
@@ -51,6 +45,7 @@ namespace RiskyPipe3D
         {
             gameObject.SetActive(false);
         }
+
     }
 }
 

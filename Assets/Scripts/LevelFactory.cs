@@ -8,25 +8,25 @@ namespace RiskyPipe3D
     {
         private List<GameObject> _pipeObjects;
 
-        public List<Pipe> Pipes { get; private set; }
+        public List<BasePipe> Pipes { get; private set; }
 
         public LevelFactory()
         {
-            Pipes = new List<Pipe>();
+            Pipes = new List<BasePipe>();
             _pipeObjects = Resources.LoadAll<GameObject>("Pipes").ToList();
             foreach(GameObject obj in _pipeObjects)
             {
-                Pipes.Add(obj.GetComponent<Pipe>());
+                Pipes.Add(obj.GetComponent<BasePipe>());
             }
         }
 
         public Level GetNewLevel(int length)
         {
             int c = 0;
-            List<Pipe> pipes = new List<Pipe>();
-            Pipe pipe = Pipes.GetPipe(PipeType.NormalPipe);
+            List<BasePipe> pipes = new List<BasePipe>();
+            BasePipe pipe = Pipes.GetPipe(PipeType.NormalPipe);
             pipes.Add(pipe);
-            Pipe divisionPipe = Pipes.GetPipe(PipeType.MidRightPipe);
+            BasePipe divisionPipe = Pipes.GetPipe(PipeType.MidRightPipe);
             pipes.Add(divisionPipe);
             for(int i = 0; i < 5; i++)
             {
@@ -43,7 +43,7 @@ namespace RiskyPipe3D
             for(int i = 0; i< pipes.Count; i++)
             {
                 GameObject gameObject = MonoBehaviour.Instantiate(pipes[i].gameObject);
-                pipes[i] = gameObject.GetComponent<Pipe>();
+                pipes[i] = gameObject.GetComponent<BasePipe>();
             }
 
             return new Level(pipes);

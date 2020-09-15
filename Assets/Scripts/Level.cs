@@ -4,9 +4,9 @@ namespace RiskyPipe3D
 {
     public class Level
     {
-        public List<Pipe> Pipes { get; private set; }
+        public List<BasePipe> Pipes { get; private set; }
 
-        public Level(List<Pipe> pipes)
+        public Level(List<BasePipe> pipes)
         {
             Pipes = pipes;
         }
@@ -23,7 +23,7 @@ namespace RiskyPipe3D
 
         public void EndLevel()
         {
-            foreach(Pipe p in Pipes)
+            foreach(BasePipe p in Pipes)
             {
                 p.Deactive();
             }
@@ -31,7 +31,7 @@ namespace RiskyPipe3D
 
         public void StartLevel()
         {
-            foreach(Pipe p in Pipes)
+            foreach(BasePipe p in Pipes)
             {
                 p.Active();
             }
