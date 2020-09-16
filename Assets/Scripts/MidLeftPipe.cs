@@ -7,7 +7,12 @@ namespace RiskyPipe3D
         private void OnTriggerEnter(UnityEngine.Collider other)
         {
             if (other.CompareTag("Player"))
-                other.GetComponent<PlayerController>().Rotation(Direction.Left);
+            {
+                PlayerController pController = other.GetComponent<PlayerController>();
+                pController.Rotation(Direction.Left);
+                pController.SpeedDown();
+            }
         }
+
     }
 }

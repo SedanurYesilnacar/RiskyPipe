@@ -6,7 +6,12 @@
         private void OnTriggerEnter(UnityEngine.Collider other)
         {
             if (other.CompareTag("Player"))
-                other.GetComponent<PlayerController>().Rotation(Direction.Right);
+            {
+                PlayerController pController = other.GetComponent<PlayerController>();
+                pController.Rotation(Direction.Right);
+                pController.SpeedDown();
+            }
         }
+
     }
 }

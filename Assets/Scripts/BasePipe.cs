@@ -45,7 +45,19 @@ namespace RiskyPipe3D
         {
             gameObject.SetActive(false);
         }
-
+        private void OnTriggerExit(Collider other)
+        {
+            if(this as MidLeftPipe || this as MidRightPipe)
+            {
+                if (other.CompareTag("Player"))
+                {
+                    PlayerController pController = other.GetComponent<PlayerController>();
+                    pController.SetPosition(EndPosition.position);
+                    pController.SpeedUp();
+                    GetComponent<Collider>().enabled = false;
+                }
+            }
+        }
     }
 }
 

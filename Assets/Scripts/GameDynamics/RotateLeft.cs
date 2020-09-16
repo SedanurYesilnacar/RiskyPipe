@@ -7,7 +7,7 @@ namespace RiskyPipe3D.GameDynamics
         public override bool Execute(Transform transform, float turnSpeed)
         {
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(_toRotation), turnSpeed);
-            //Debug.Log(transform.rotation.eulerAngles.y.Equals(_toRotation.y));
+            Debug.Log(transform.rotation.eulerAngles.y.Equals(_toRotation.y + (_toRotation.y < 0f ? 360f : 0f)));
             return transform.rotation.eulerAngles.y.Equals(_toRotation.y + (_toRotation.y < 0f ? 360f : 0f));
         }
 
