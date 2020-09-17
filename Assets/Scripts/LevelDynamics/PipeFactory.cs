@@ -5,24 +5,34 @@ namespace RiskyPipe3D.LevelDynamics
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
+    using RiskyPipe3D.Extensions;
     public class PipeFactory
     {
-        private List<GameObject> _pipeObjs;
-        private List<BasePipe> _pipes;
-
-        private BasePipe[] _forwardMidPipes;
-        private BasePipe _leftMidPipe;
-        private BasePipe _rightMidPipe;
-        private BasePipe _horizontalPipe;
-        private BasePipe _verticalPipe;
-        public PipeFactory()
+        public static PipeFactory Instance { get; private set; } = new PipeFactory();
+        
+        private List<Pipe> _pipes;
+        private GameObject[] _pipeObjs;
+        private PipeFactory()
         {
-            _pipes = new List<BasePipe>();
-            _pipeObjs = Resources.LoadAll<GameObject>("Pipes").ToList();
+            _pipes = new List<Pipe>();
+            _pipeObjs = Resources.LoadAll<GameObject>("Pipes");
             foreach (GameObject obj in _pipeObjs)
-                _pipes.Add(obj.GetComponent<BasePipe>());
-
+                _pipes.Add(obj.GetComponent<Pipe>());
         }
 
+        public Pipe GetPipe(PipeType pipeType)
+        {    
+            return _pipes.GetPipe(pipeType);
+        }
+
+        public Pipe GetDirectionPipe(PipeType direction)
+        {
+            if (direction.Equals(PipeType.Vertical))
+                return _pipes.GetDirectionPipe();
+            else if (direction.Equals(PipeType.LeftHorizontal))
+                return _pipes.GetPipe(PipeType.LeftVertical);
+            else
+                return _pipes.GetPipe(PipeType.RightVertical);
+        }
     }
 }

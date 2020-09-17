@@ -14,11 +14,15 @@
         Back,
         None
     }
-
+    
     public enum PipeType
     {
-        Right,
-        Left,
-        Vertical
+        RightHorizontal,
+        LeftHorizontal,
+        Vertical,
+        LeftVertical,
+        RightVertical,
+        VerticalLeft,
+        VerticalRight
     }
 }

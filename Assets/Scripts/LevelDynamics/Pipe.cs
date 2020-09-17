@@ -3,15 +3,17 @@
     using RiskyPipe3D.Enums;
     using System.Collections.Generic;
     using UnityEngine;
-    public class BasePipe : MonoBehaviour
+    public class Pipe : MonoBehaviour
     {
+        [SerializeField] private PipeType _pipeType;
+        public PipeType PipeType { get => _pipeType; }
         [SerializeField] private Transform _endPoint;
         public Transform EndPoint { get => _endPoint; }
-        public void SetObject(BasePipe before = null)
+        public void SetObject(Pipe before = null)
         {
             if(before == null)
             {
-                Debug.Log("1");
+                transform.position = Vector3.zero;
             }
             else
             {
