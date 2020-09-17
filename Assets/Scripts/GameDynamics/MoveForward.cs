@@ -2,11 +2,16 @@
 
 namespace RiskyPipe3D.GameDynamics
 {
-    public class MoveForward : IMove
+    public class MoveForward : ICommand
     {
-        public void Execute(Transform transform, float speed)
+        private IMove _move;
+        public MoveForward(IMove move)
         {
-            transform.position += transform.forward * speed * Time.fixedDeltaTime;
+            _move = move;
+        }
+        public void Execute()
+        {
+            _move.GetTransform().position += _move.GetTransform().transform.forward * _move.GetSpeed() * Time.fixedDeltaTime;
         }
     }
 }

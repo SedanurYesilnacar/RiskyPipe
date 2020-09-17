@@ -1,56 +1,59 @@
 ﻿namespace RiskyPipe3D.GameDynamics
 {
+    using RiskyPipe3D.Enums;
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, IRotate, IScaleVertical, IScaleTapTap, IMove
     {
         [SerializeField] private float _defaultSpeed = .5f;
+        private float _speed;
         [SerializeField] private float _turnSpeed = 10f;
         [SerializeField] private float _scaleSpeed = .1f;
         [SerializeField] private float _maxScale = 2f;
         [SerializeField] private float _minScale = 1f;
 
-        private IMove _moveForward;
-        private IScale _scaleIt;
+        private ICommand _moveForward;
 
-        private Dictionary<Direction, IRotate> _rotations;
+        private Direction _direction = Direction.Forward;
+        private Dictionary<Direction, ICommand> _rotations;
 
+        private ScaleMechanic _mechanic = ScaleMechanic.Joystick;
+        private Dictionary<ScaleMechanic, ICommand> _mechanics;
         private Joystick _joystick;
 
-        private float _speed;
-
+        // last rotation because must know before _rotation.Execute()
+        private Vector3 _lastRotation = Vector3.zero;
         private void Awake()
+        {
+            Initialize();
+        }
+
+        private void Initialize()
         {
             _speed = _defaultSpeed;
             _joystick = FindObjectOfType<Joystick>();
-            _rotations = new Dictionary<Direction, IRotate>();
-            _moveForward = new MoveForward();
-            _scaleIt = new ScaleIt(_minScale, _maxScale, _scaleSpeed);
-            _rotations.Add(Direction.Left, new RotateLeft());
-            _rotations.Add(Direction.Right, new RotateRight());
+            _rotations = new Dictionary<Direction, ICommand>();
+            _mechanics = new Dictionary<ScaleMechanic, ICommand>();
+            _moveForward = new MoveForward(this);
+            _mechanics.Add(ScaleMechanic.Joystick, new ScaleJoystick(this));
+            _mechanics.Add(ScaleMechanic.TapTap, new ScaleTapTap(this));
+            _rotations.Add(Direction.Left, new RotateLeft(this));
+            _rotations.Add(Direction.Right, new RotateRight(this));
         }
 
         private void FixedUpdate()
         {
-            _moveForward.Execute(transform, _speed);
-            _scaleIt.Execute(transform, _joystick.Vertical);
+            _moveForward.Execute();
+            _mechanics[_mechanic].Execute();
+            if(_rotations.ContainsKey(_direction))
+                _rotations[_direction].Execute();
         }
 
-        private IEnumerator Rotate(Direction direction)
+        public void SetRotation(Direction direction)
         {
-            var wait = new WaitForSeconds(.1f);
-            int count = 0;
-            _rotations[direction].SetToRotation(transform.rotation.eulerAngles);
-            while(!_rotations[direction].Execute(transform, _turnSpeed) && count++ < (90/_turnSpeed))
-            {
-                yield return wait;
-            }
-        }
-
-        public void Rotation(Direction direction)
-        {
-            StartCoroutine(Rotate(direction));
+            _lastRotation = transform.rotation.eulerAngles;
+            _direction = direction;
         }
 
         public void SetPosition(Vector3 pos)
@@ -68,5 +71,45 @@
             _speed = _defaultSpeed;
         }
 
+        #region Getters
+        public Transform GetTransform()
+        {
+            return transform;
+        }
+        public float GetTurnSpeed()
+        {
+            return _turnSpeed;
+        }
+
+        public Vector3 GetLastRotation()
+        {
+            return _lastRotation;
+        }
+
+        public float GetVertical()
+        {
+            return _joystick.Vertical;
+        }
+
+        public Vector3 GetMaxScale()
+        {
+            return _maxScale * Vector3.one;
+        }
+
+        public Vector3 GetMinScale()
+        {
+            return _minScale * Vector3.one;
+        }
+
+        public float GetScaleSpeed()
+        {
+            return _scaleSpeed;
+        }
+
+        public float GetSpeed()
+        {
+            return _speed;
+        }
+        #endregion
     }
 }

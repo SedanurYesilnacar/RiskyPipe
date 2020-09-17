@@ -2,8 +2,9 @@
 namespace RiskyPipe3D.GameDynamics
 {
     using UnityEngine;
-    public interface IMove : ICommand
+    public interface IMove
     {
-        void Execute(Transform transform, float speed);
+        float GetSpeed();
+        Transform GetTransform();
     }
 }

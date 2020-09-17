@@ -2,19 +2,18 @@
 
 namespace RiskyPipe3D.GameDynamics
 {
-    public class RotateLeft : IRotate
+    public class RotateLeft : ICommand
     {
-        public override bool Execute(Transform transform, float turnSpeed)
+        private IRotate _rotate;
+        public RotateLeft(IRotate rotate)
         {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(_toRotation), turnSpeed);
-            Debug.Log(transform.rotation.eulerAngles.y.Equals(_toRotation.y + (_toRotation.y < 0f ? 360f : 0f)));
-            return transform.rotation.eulerAngles.y.Equals(_toRotation.y + (_toRotation.y < 0f ? 360f : 0f));
+            _rotate = rotate;
         }
 
-        public override void SetToRotation(Vector3 lastRotation)
+        public void Execute()
         {
-            _toRotation = new Vector3(lastRotation.x, lastRotation.y - 90, lastRotation.z);
-            Debug.LogError(_toRotation);
+            Vector3 _toRotation = _rotate.GetLastRotation() + (Vector3.up * -90);
+            _rotate.GetTransform().rotation = Quaternion.RotateTowards(_rotate.GetTransform().rotation, Quaternion.Euler(_toRotation), _rotate.GetTurnSpeed());
         }
     }
 }
