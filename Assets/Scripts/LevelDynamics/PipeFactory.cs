@@ -8,19 +8,19 @@ namespace RiskyPipe3D.LevelDynamics
     public class PipeFactory
     {
         private List<GameObject> _pipeObjs;
-        private List<Pipe> _pipes;
+        private List<BasePipe> _pipes;
 
-        private Pipe[] _forwardMidPipes;
-        private Pipe _leftMidPipe;
-        private Pipe _rightMidPipe;
-        private Pipe _horizontalPipe;
-        private Pipe _verticalPipe;
+        private BasePipe[] _forwardMidPipes;
+        private BasePipe _leftMidPipe;
+        private BasePipe _rightMidPipe;
+        private BasePipe _horizontalPipe;
+        private BasePipe _verticalPipe;
         public PipeFactory()
         {
-            _pipes = new List<Pipe>();
+            _pipes = new List<BasePipe>();
             _pipeObjs = Resources.LoadAll<GameObject>("Pipes").ToList();
             foreach (GameObject obj in _pipeObjs)
-                _pipes.Add(obj.GetComponent<Pipe>());
+                _pipes.Add(obj.GetComponent<BasePipe>());
 
         }
 

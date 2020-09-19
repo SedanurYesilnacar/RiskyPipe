@@ -19,6 +19,6 @@
     {
         Right,
         Left,
-        Forward
+        Vertical
     }
 }
