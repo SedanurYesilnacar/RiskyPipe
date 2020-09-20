@@ -10,7 +10,7 @@ namespace RiskyPipe3D
 
         private void Awake()
         {
-            _level = new Level(1000);
+            _level = new Level(50);
             _level.Initialize();
         }
 

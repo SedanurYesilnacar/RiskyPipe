@@ -23,6 +23,7 @@
         LeftVertical,
         RightVertical,
         VerticalLeft,
-        VerticalRight
+        VerticalRight,
+        FinishPipe
     }
 }

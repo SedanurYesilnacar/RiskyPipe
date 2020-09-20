@@ -42,6 +42,19 @@
                 else
                     currentPipe = PipeFactory.Instance.GetPipe(PipeType.Vertical);
             }
+            Direction direction = Direction.Forward;
+            if(currentPipe.PipeType.Equals(PipeType.LeftHorizontal))
+            {
+                direction = Direction.Left;
+            }
+            else if(currentPipe.PipeType.Equals(PipeType.RightHorizontal))
+            {
+                direction = Direction.Right;
+            }
+            currentPipe = PipeFactory.Instance.GetPipe(PipeType.FinishPipe);
+            FinishPipe finishPipe = MonoBehaviour.Instantiate(currentPipe).GetComponent<FinishPipe>();
+            finishPipe.SetRotation(direction);
+            _pipes.Add(finishPipe);
         }
 
         public void LoadLevel()
