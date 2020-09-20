@@ -11,10 +11,12 @@ GameObject:
   - component: {fileID: 2381633225903570078}
   - component: {fileID: 1631034625431237435}
   - component: {fileID: 3550646372352919537}
-  - component: {fileID: 707620027560369108}
+  - component: {fileID: 6784905592047725760}
+  - component: {fileID: 6784905592047725758}
+  - component: {fileID: 6784905592047725759}
   m_Layer: 0
   m_Name: plain-ring
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,9 +28,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3046283140949583396}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 1, y: 1, z: 0.35}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -80,7 +82,36 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &707620027560369108
+--- !u!54 &6784905592047725760
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3046283140949583396}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 84
+  m_CollisionDetection: 3
+--- !u!65 &6784905592047725758
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3046283140949583396}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.57482266, y: 0.15865579, z: 0.500504}
+  m_Center: {x: -0.044097267, y: 0.9206721, z: 0}
+--- !u!114 &6784905592047725759
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -89,10 +120,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3046283140949583396}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84872a9376e76214d8ddfcf73ca2cccd, type: 3}
+  m_Script: {fileID: 11500000, guid: 1aad3fb0fda20824aa4b264c9b5e488c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
-  scaleSpeed: 0.1
-  maxScale: 0.5
-  minScale: 0.1
+  _defaultSpeed: 2
+  _turnSpeed: 2
+  _scaleSpeed: 1
+  _maxScale: 1
+  _minScale: 0.35

@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 96be6e39433f7c54aa60156d58a48910, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3079,7 +3079,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3613615212852797194}
-  - component: {fileID: 7908295862602517483}
+  - component: {fileID: 5642176796691504956}
+  - component: {fileID: 4302506967573679150}
   m_Layer: 0
   m_Name: LeftVertical
   m_TagString: Untagged
@@ -3103,7 +3104,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7908295862602517483
+--- !u!114 &5642176796691504956
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3112,8 +3113,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 3613615212852797193}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f7a21e116f5ee442bdad1815218af2c, type: 3}
+  m_Script: {fileID: 11500000, guid: 820ee819bf3f3a8469ea6a0be0c8ba3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _pipeType: 3
   _endPoint: {fileID: 3613615212804844815}
+--- !u!65 &4302506967573679150
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3613615212852797193}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.97911215, y: 5, z: 1.0254315}
+  m_Center: {x: -0.4835773, y: 0.03164792, z: 0.2995196}

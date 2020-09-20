@@ -63,7 +63,7 @@
 
         public void SpeedDown()
         {
-            _speed = .5f;
+            _speed = 1.5f;
         }
 
         public void SpeedUp()
