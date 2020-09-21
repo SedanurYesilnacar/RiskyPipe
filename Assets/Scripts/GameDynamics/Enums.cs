@@ -24,6 +24,7 @@
         RightVertical,
         VerticalLeft,
         VerticalRight,
-        FinishPipe
+        FinishPipe,
+        PointPipe
     }
 }

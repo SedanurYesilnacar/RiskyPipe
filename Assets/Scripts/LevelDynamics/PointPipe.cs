@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace RiskyPipe3D.LevelDynamics
 {
-    public class FinishPipe : RotateablePipe
+    public class PointPipe : RotateablePipe
     {
         
     }

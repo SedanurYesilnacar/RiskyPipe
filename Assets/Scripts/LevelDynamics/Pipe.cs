@@ -5,6 +5,8 @@
     using UnityEngine;
     public class Pipe : MonoBehaviour
     {
+        public Direction Direction { get; set; } = Direction.Forward;
+
         [SerializeField] private PipeType _pipeType;
         public PipeType PipeType { get => _pipeType; }
         [SerializeField] private Transform _endPoint;

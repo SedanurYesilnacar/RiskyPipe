@@ -7,5 +7,8 @@
         float GetScaleSpeed();
         Vector3 GetMaxScale();
         Vector3 GetMinScale();
+
+        bool GetTapTapStatue();
+
     }
 }

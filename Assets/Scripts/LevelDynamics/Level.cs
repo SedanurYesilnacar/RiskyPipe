@@ -9,8 +9,14 @@
     {
         private List<Pipe> _pipes;
 
+        private List<Pipe> _pointPipes;
+
+        private List<Trap> _traps;
+
         private int _lenght;
-        
+
+        Direction direction = Direction.Forward;
+
         private int randomMinLenght = 4;
         private int randomMaxLength = 8;
 
@@ -18,6 +24,8 @@
         {
             _lenght = length;
             _pipes = new List<Pipe>();
+            _pointPipes = new List<Pipe>();
+            _traps = new List<Trap>();
         }
 
         public void Initialize()
@@ -28,7 +36,9 @@
                 int rand = Random.Range(randomMinLenght, randomMaxLength);
                 for(int i = 0; i < rand && i < _lenght; i++)
                 {
-                    _pipes.Add(MonoBehaviour.Instantiate(currentPipe).GetComponent<Pipe>());
+                    Pipe pipe = MonoBehaviour.Instantiate(currentPipe).GetComponent<Pipe>();
+                    pipe.Direction = direction;
+                    _pipes.Add(pipe);
                     _lenght--;
                 }
                 if (_lenght <= 0)
@@ -42,7 +52,7 @@
                 else
                     currentPipe = PipeFactory.Instance.GetPipe(PipeType.Vertical);
             }
-            Direction direction = Direction.Forward;
+            
             if(currentPipe.PipeType.Equals(PipeType.LeftHorizontal))
             {
                 direction = Direction.Left;
@@ -55,6 +65,14 @@
             FinishPipe finishPipe = MonoBehaviour.Instantiate(currentPipe).GetComponent<FinishPipe>();
             finishPipe.SetRotation(direction);
             _pipes.Add(finishPipe);
+            
+            for(int i = 0; i< 5; i++)
+            {
+                PointPipe pointPipe = MonoBehaviour.Instantiate(PipeFactory.Instance.GetPipe(PipeType.PointPipe)).GetComponent<PointPipe>();
+                pointPipe.SetRotation(direction);
+                _pointPipes.Add(pointPipe);
+                _pipes.Add(pointPipe);
+            }
         }
 
         public void LoadLevel()
@@ -65,6 +83,23 @@
             for(int i = 1; i < _pipes.Count; i++)
             {
                 _pipes[i].SetObject(_pipes[i - 1]);
+            }
+        }
+
+        public void LoadTraps()
+        {
+            for(int i = 0; i<5; i++)
+            {
+                Trap trap = MonoBehaviour.Instantiate(TrapFactory.Instance.GetTrap()).GetComponent<Trap>();
+                _traps.Add(trap);
+                Pipe currentPipe = _pipes[Random.Range(0, _pipes.Count)];
+                while(currentPipe as MidPipe)
+                {
+                    currentPipe = _pipes[Random.Range(0, _pipes.Count)];
+                }
+                trap.SetPosition(currentPipe.transform.position);
+                trap.SetRotation(currentPipe.PipeType);
+                trap.SetScale(Random.Range(2, 5));
             }
         }
 

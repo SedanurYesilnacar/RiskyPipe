@@ -13,12 +13,16 @@
         [SerializeField] private float _maxScale = 2f;
         [SerializeField] private float _minScale = 1f;
 
+        Rigidbody _rigidbody;
+
+        private bool _isTap;
+
         private ICommand _moveForward;
 
         private Direction _direction = Direction.Forward;
         private Dictionary<Direction, ICommand> _rotations;
 
-        private ScaleMechanic _mechanic = ScaleMechanic.Joystick;
+        private ScaleMechanic _mechanic = ScaleMechanic.TapTap;
         private Dictionary<ScaleMechanic, ICommand> _mechanics;
         private Joystick _joystick;
 
@@ -31,6 +35,7 @@
 
         private void Initialize()
         {
+            _rigidbody = GetComponent<Rigidbody>();
             _speed = _defaultSpeed;
             _joystick = FindObjectOfType<Joystick>();
             _rotations = new Dictionary<Direction, ICommand>();
@@ -45,9 +50,22 @@
         private void FixedUpdate()
         {
             _moveForward.Execute();
-            _mechanics[_mechanic].Execute();
+            //_mechanics[_mechanic].Execute();
             if(_rotations.ContainsKey(_direction))
-                _rotations[_direction].Execute();
+                _rotations[_direction].Execute(); 
+        }
+
+        private void Update()
+        {
+            _mechanics[_mechanic].Execute();
+            if (_mechanic.Equals(ScaleMechanic.TapTap) && Input.GetMouseButtonDown(0))
+            {
+                _isTap = true;
+            }
+            else
+            {
+                _isTap = false;
+            }
         }
 
         public void SetRotation(Direction direction)
@@ -63,7 +81,7 @@
 
         public void SpeedDown()
         {
-            _speed = 1.5f;
+            _speed = 0.5f;
         }
 
         public void SpeedUp()
@@ -93,12 +111,12 @@
 
         public Vector3 GetMaxScale()
         {
-            return _maxScale * Vector3.one;
+            return new Vector3(_maxScale, _maxScale, transform.localScale.z);
         }
 
         public Vector3 GetMinScale()
         {
-            return _minScale * Vector3.one;
+            return new Vector3(_minScale, _minScale, transform.localScale.z);
         }
 
         public float GetScaleSpeed()
@@ -110,6 +128,17 @@
         {
             return _speed;
         }
+
+        public bool GetTapTapStatue()
+        {
+            return _isTap;
+        }
+
+        public void SetScale(float value)
+        {
+            _maxScale = value;
+        }
+
         #endregion
     }
 }
