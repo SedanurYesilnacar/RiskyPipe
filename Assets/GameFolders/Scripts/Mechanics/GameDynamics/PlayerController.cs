@@ -145,16 +145,36 @@
             return _isTap;
         }
 
-        public void SetScale(float value)
+
+        #endregion
+
+        #region Setters
+
+        public void SetMaxScale(float value)
         {
             _maxScale = value;
         }
 
         public void SetSpeed(float value)
         {
-            _speed= value;
+            _speed = value;
+        }
+
+        public void SetScale(float value, float scaleDuration = 1.5f)
+        {
+            StartCoroutine(ScaleObject(new Vector3(value, value, transform.localScale.z)));
         }
 
         #endregion
+
+        IEnumerator ScaleObject(Vector3 targetScale, float scaleDuration = 1.5f)
+        {
+            Vector3 actualScale = transform.localScale;        
+            for (float t = 0; t < 1; t += Time.deltaTime / scaleDuration)
+            {
+                transform.localScale = Vector3.Lerp(actualScale, targetScale, t);
+                yield return null;
+            }
+        }
     }
 }

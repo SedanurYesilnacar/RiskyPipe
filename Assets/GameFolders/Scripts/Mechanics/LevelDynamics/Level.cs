@@ -36,7 +36,7 @@
                 int rand = Random.Range(randomMinLenght, randomMaxLength);
                 for(int i = 0; i < rand && i < _lenght; i++)
                 {
-                    Pipe pipe = MonoBehaviour.Instantiate(currentPipe).GetComponent<Pipe>();
+                    Pipe pipe = currentPipe;
                     pipe.Direction = direction;
                     _pipes.Add(pipe);
                     _lenght--;
@@ -44,7 +44,7 @@
                 if (_lenght <= 0)
                     break;
                 currentPipe = PipeFactory.Instance.GetDirectionPipe(currentPipe.PipeType);
-                _pipes.Add(MonoBehaviour.Instantiate(currentPipe).GetComponent<Pipe>());
+                _pipes.Add(currentPipe);
                 if (currentPipe.PipeType.Equals(PipeType.VerticalLeft))
                     currentPipe = PipeFactory.Instance.GetPipe(PipeType.LeftHorizontal);
                 else if (currentPipe.PipeType.Equals(PipeType.VerticalRight))
@@ -62,13 +62,13 @@
                 direction = Direction.Right;
             }
             currentPipe = PipeFactory.Instance.GetPipe(PipeType.FinishPipe);
-            FinishPipe finishPipe = MonoBehaviour.Instantiate(currentPipe).GetComponent<FinishPipe>();
+            FinishPipe finishPipe = currentPipe as FinishPipe;
             finishPipe.SetRotation(direction);
             _pipes.Add(finishPipe);
             
             for(int i = 0; i< 5; i++)
             {
-                PointPipe pointPipe = MonoBehaviour.Instantiate(PipeFactory.Instance.GetPipe(PipeType.PointPipe)).GetComponent<PointPipe>();
+                PointPipe pointPipe = PipeFactory.Instance.GetPipe(PipeType.PointPipe) as PointPipe;
                 pointPipe.SetRotation(direction);
                 _pointPipes.Add(pointPipe);
                 _pipes.Add(pointPipe);
@@ -77,11 +77,17 @@
 
         public void LoadLevel()
         {
+            GameObject pipe = MonoBehaviour.Instantiate(_pipes[0].gameObject);
+            _pipes[0] = pipe.GetComponent<Pipe>();
             if (_pipes.Count == 0)
                 return;
             _pipes[0].SetObject();
             for(int i = 1; i < _pipes.Count; i++)
             {
+
+                 pipe = MonoBehaviour.Instantiate(_pipes[i].gameObject);
+
+                _pipes[i] = pipe.GetComponent<Pipe>();
                 _pipes[i].SetObject(_pipes[i - 1]);
             }
         }

@@ -14,23 +14,23 @@ namespace RiskyPipe3D
         {
             _playerController = GetComponent<PlayerController>();
         }
-        private void OnTriggerEnter(Collider collision)
+        private void OnTriggerEnter(Collider collider)
         {
-            ICollisionEnterResponse collisionEnterResponse = collision.gameObject.GetComponent<ICollisionEnterResponse>();
-            collisionEnterResponse?.OnCollisionEnterResponse(_playerController);
+            IColliderEnterResponse colliderEnterResponse = collider.gameObject.GetComponent<IColliderEnterResponse>();
+            colliderEnterResponse?.OnColliderEnterResponse(_playerController);
         }
 
-        private void OnTriggerStay(Collider collision)
-        {
-            ICollisionStayResponse collisionStayResponse = collision.gameObject.GetComponent<ICollisionStayResponse>();
-            collisionStayResponse?.OnCollisionStayResponse(_playerController);
-        }
+        //private void OnTriggerStay(Collider collision)
+        //{
+        //    ICollisionStayResponse collisionStayResponse = collision.gameObject.GetComponent<ICollisionStayResponse>();
+        //    collisionStayResponse?.OnCollisionStayResponse(_playerController);
+        //}
 
-        private void OnTriggerExit(Collider collision)
-        {
-            ICollisionExitResponse collisionExitResponse = collision.gameObject.GetComponent<ICollisionExitResponse>();
-            collisionExitResponse?.OnCollisionExitResponse(_playerController);
-        }
+        //private void OnTriggerExit(Collider collision)
+        //{
+        //    ICollisionExitResponse collisionExitResponse = collision.gameObject.GetComponent<ICollisionExitResponse>();
+        //    collisionExitResponse?.OnCollisionExitResponse(_playerController);
+        //}
     }
 
 }

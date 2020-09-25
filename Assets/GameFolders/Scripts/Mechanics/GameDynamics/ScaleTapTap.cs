@@ -9,6 +9,10 @@ namespace RiskyPipe3D.GameDynamics
         private float _scaleValue = 0;
         private float _maxScaleValue = 1f;
         private float _minScaleValue = -1f;
+
+        private float _scaleDecreaseFactor = 0.5f;
+        private float _scaleIncreaseFactor = 15f;
+            
         public ScaleTapTap(IScaleTapTap scaleTapTap)
         {
             _scaleTapTap = scaleTapTap;
@@ -22,11 +26,11 @@ namespace RiskyPipe3D.GameDynamics
                 {
                     _scaleValue = 0;
                 }
-                _scaleValue += 15f * Time.fixedDeltaTime;
+                _scaleValue += _scaleIncreaseFactor * Time.fixedDeltaTime;
             }
             else
             {
-                _scaleValue -= 0.5f * Time.fixedDeltaTime;
+                _scaleValue -= _scaleDecreaseFactor * Time.fixedDeltaTime;
             }
             
             _scaleTapTap.GetTransform().localScale +=  _scaleValue * Time.fixedDeltaTime * new Vector3(1,1,0);
@@ -39,5 +43,17 @@ namespace RiskyPipe3D.GameDynamics
             else if (_scaleValue < _minScaleValue)
                 _scaleValue = _minScaleValue;
         }
+
+        public void SetScaleDecreaseFactor(float value)
+        {
+            _scaleDecreaseFactor = value;
+        }
+        public void SetScaleIncreaseFactor(float value)
+        {
+            _scaleIncreaseFactor = value;
+        }
+
+
     }
+
 }

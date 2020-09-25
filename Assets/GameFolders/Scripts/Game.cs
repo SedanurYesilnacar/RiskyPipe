@@ -23,7 +23,7 @@
             throw new System.NotImplementedException();
         }
 
-        public void PuaseGame()
+        public void PauseGame()
         {
             throw new System.NotImplementedException();
         }

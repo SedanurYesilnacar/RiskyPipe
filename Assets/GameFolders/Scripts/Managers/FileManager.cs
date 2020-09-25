@@ -15,7 +15,7 @@ public class FileManager
         SavePlayer(p);
     }
 
-    public void SavePlayer(PlayerView playerView)
+    private void SavePlayer(PlayerView playerView)
     {
         Player p = new Player();
         p.highScore = playerView.HighScore;

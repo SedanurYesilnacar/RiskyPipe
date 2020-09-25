@@ -4,12 +4,13 @@ using UnityEngine;
 
 namespace RiskyPipe3D
 {
-    public class LineBeginningCollider : MonoBehaviour,ICollisionEnterResponse
+    public class LineBeginningCollider : MonoBehaviour,IColliderEnterResponse
     {
-        public void OnCollisionEnterResponse(PlayerController player)
+        public void OnColliderEnterResponse(PlayerController player)
         {
             player.ChangeMechanic(ScaleMechanic.None);
-            player.SetScale(4f);
+            player.SetScale(0.4f);
+            player.SetSpeed(0.6f);
         }
     }
 
