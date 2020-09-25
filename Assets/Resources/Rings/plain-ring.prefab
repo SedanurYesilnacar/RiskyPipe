@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6784905592047725760}
   - component: {fileID: 6784905592047725758}
   - component: {fileID: 6784905592047725759}
+  - component: {fileID: 5962968571712020485}
   m_Layer: 0
   m_Name: plain-ring
   m_TagString: Player
@@ -128,3 +129,15 @@ MonoBehaviour:
   _scaleSpeed: 1
   _maxScale: 1
   _minScale: 0.35
+--- !u!114 &5962968571712020485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3046283140949583396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f06800d059c29ba44bb4861174174166, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

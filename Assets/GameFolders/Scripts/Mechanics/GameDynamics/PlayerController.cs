@@ -22,7 +22,14 @@
         private Direction _direction = Direction.Forward;
         private Dictionary<Direction, ICommand> _rotations;
 
-        private ScaleMechanic _mechanic = ScaleMechanic.TapTap;
+        private ScaleMechanic _mechanic;
+
+        public void ChangeMechanic(ScaleMechanic typeOfMechanic=ScaleMechanic.Joystick)
+        {
+            Debug.Log(typeOfMechanic.ToString());
+            _mechanic = typeOfMechanic;
+        }
+
         private Dictionary<ScaleMechanic, ICommand> _mechanics;
         private Joystick _joystick;
 
@@ -35,6 +42,7 @@
 
         private void Initialize()
         {
+            ChangeMechanic();
             _rigidbody = GetComponent<Rigidbody>();
             _speed = _defaultSpeed;
             _joystick = FindObjectOfType<Joystick>();
@@ -45,18 +53,21 @@
             _mechanics.Add(ScaleMechanic.TapTap, new ScaleTapTap(this));
             _rotations.Add(Direction.Left, new RotateLeft(this));
             _rotations.Add(Direction.Right, new RotateRight(this));
+            
         }
 
         private void FixedUpdate()
         {
             _moveForward.Execute();
             //_mechanics[_mechanic].Execute();
-            if(_rotations.ContainsKey(_direction))
-                _rotations[_direction].Execute(); 
+            if (_rotations.ContainsKey(_direction))
+                _rotations[_direction].Execute();
         }
 
         private void Update()
         {
+            if (_mechanic.Equals(ScaleMechanic.None)) return;
+
             _mechanics[_mechanic].Execute();
             if (_mechanic.Equals(ScaleMechanic.TapTap) && Input.GetMouseButtonDown(0))
             {
@@ -137,6 +148,11 @@
         public void SetScale(float value)
         {
             _maxScale = value;
+        }
+
+        public void SetSpeed(float value)
+        {
+            _speed= value;
         }
 
         #endregion

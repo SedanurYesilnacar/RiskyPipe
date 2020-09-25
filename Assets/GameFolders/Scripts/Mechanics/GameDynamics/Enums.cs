@@ -2,6 +2,7 @@
 {
     public enum ScaleMechanic
     {
+        None,
         TapTap,
         Joystick
     }
@@ -27,4 +28,6 @@
         FinishPipe,
         PointPipe
     }
+
+
 }
