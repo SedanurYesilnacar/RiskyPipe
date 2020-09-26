@@ -45,6 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f7a21e116f5ee442bdad1815218af2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _direction: 0
+  _beforePipeType: 0
+  _afterPipeType: 0
   _pipeType: 0
   _endPoint: {fileID: 2344005570739423764}
 --- !u!1 &2344005570739423787

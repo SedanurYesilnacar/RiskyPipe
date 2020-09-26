@@ -3,10 +3,14 @@
     using RiskyPipe3D.Enums;
     using System.Collections.Generic;
     using UnityEngine;
-    public class Pipe : MonoBehaviour
+    public class Pipe : BasePipe
     {
-        public Direction Direction { get; set; } = Direction.Forward;
-
+        [SerializeField] private Direction _direction;
+        public Direction Direction { get => _direction; }
+        [SerializeField] private PipeType _beforePipeType;
+        public PipeType BeforePipeType { get => _beforePipeType; }
+        [SerializeField] private PipeType _afterPipeType;
+        public PipeType AfterPipeType { get => _afterPipeType; }
         [SerializeField] private PipeType _pipeType;
         public PipeType PipeType { get => _pipeType; }
         [SerializeField] private Transform _endPoint;

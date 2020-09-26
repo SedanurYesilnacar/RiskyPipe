@@ -12,7 +12,6 @@ namespace RiskyPipe3D.LevelDynamics
     {
         public void SetRotation(Direction direction)
         {
-            Direction = direction;
             if (direction.Equals(Direction.Forward))
             {
                 return;

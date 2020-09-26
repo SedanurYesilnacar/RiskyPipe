@@ -20,7 +20,7 @@
         private ICommand _moveForward;
 
         private Direction _direction = Direction.Forward;
-        private Dictionary<Direction, ICommand> _rotations;
+        private ICommand _rotation;
 
         private ScaleMechanic _mechanic;
 
@@ -32,6 +32,11 @@
 
         private Dictionary<ScaleMechanic, ICommand> _mechanics;
         private Joystick _joystick;
+
+        // 
+        private Transform _centerObject;
+
+        private float _rotateValue;
 
         // last rotation because must know before _rotation.Execute()
         private Vector3 _lastRotation = Vector3.zero;
@@ -46,22 +51,17 @@
             _rigidbody = GetComponent<Rigidbody>();
             _speed = _defaultSpeed;
             _joystick = FindObjectOfType<Joystick>();
-            _rotations = new Dictionary<Direction, ICommand>();
+            _rotation = new Rotate(this);
             _mechanics = new Dictionary<ScaleMechanic, ICommand>();
             _moveForward = new MoveForward(this);
             _mechanics.Add(ScaleMechanic.Joystick, new ScaleJoystick(this));
             _mechanics.Add(ScaleMechanic.TapTap, new ScaleTapTap(this));
-            _rotations.Add(Direction.Left, new RotateLeft(this));
-            _rotations.Add(Direction.Right, new RotateRight(this));
             
         }
 
         private void FixedUpdate()
         {
             _moveForward.Execute();
-            //_mechanics[_mechanic].Execute();
-            if (_rotations.ContainsKey(_direction))
-                _rotations[_direction].Execute();
         }
 
         private void Update()
@@ -79,6 +79,12 @@
             }
         }
 
+        public void Rotate()
+        {
+            _rotation.Execute();
+            _rotateValue = transform.rotation.eulerAngles.y;
+        }
+
         public void SetRotation(Direction direction)
         {
             _lastRotation = transform.rotation.eulerAngles;
@@ -92,12 +98,17 @@
 
         public void SpeedDown()
         {
-            _speed = 0.5f;
+            _speed = 0f;
         }
 
         public void SpeedUp()
         {
             _speed = _defaultSpeed;
+        }
+        
+        public void SetCenterObject(Transform centerObj)
+        {
+            _centerObject = centerObj;
         }
 
         #region Getters
@@ -153,6 +164,16 @@
         public void SetSpeed(float value)
         {
             _speed= value;
+        }
+
+        public Vector3 GetCenterObject()
+        {
+            return _centerObject.position;
+        }
+
+        public Direction GetDirection()
+        {
+            return _direction;
         }
 
         #endregion

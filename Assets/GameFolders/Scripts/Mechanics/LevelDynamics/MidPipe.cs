@@ -6,25 +6,15 @@
 
     public class MidPipe :Pipe
     {
-        
+        [SerializeField] private Transform centerObj;
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
             {
-                Direction direction=Direction.Left;
                 PlayerController playerController = other.GetComponent<PlayerController>();
-
-                if (PipeType.Equals(PipeType.VerticalLeft) || PipeType.Equals(PipeType.RightVertical))
-                {
-                    direction = Direction.Left;
-                }
-                else
-                {
-                    direction = Direction.Right;
-                }
                 
-                playerController.SpeedDown();
-                playerController.SetRotation(direction);
+                playerController.SetCenterObject(centerObj);
+                playerController.SetRotation(Direction);
             }
         }
 
@@ -35,10 +25,20 @@
                 PlayerController playerController = other.GetComponent<PlayerController>();
 
                 GetComponent<BoxCollider>().enabled = false;
-                playerController.SpeedUp();
+                playerController.SetCenterObject(null);
                 playerController.SetPosition(EndPoint.position);
             }
         }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                PlayerController playerController = other.GetComponent<PlayerController>();
+                playerController.Rotate();
+            }
+        }
+
     }
 
 }

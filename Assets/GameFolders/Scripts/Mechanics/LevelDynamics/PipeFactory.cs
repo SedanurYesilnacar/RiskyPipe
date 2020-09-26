@@ -24,14 +24,22 @@ namespace RiskyPipe3D.LevelDynamics
             return _pipes.GetPipe(pipeType);
         }
 
-        public Pipe GetDirectionPipe(PipeType direction)
+        public Pipe GetDirectionPipe(PipeType pipeType)
         {
-            if (direction.Equals(PipeType.Vertical))
-                return _pipes.GetDirectionPipe();
-            else if (direction.Equals(PipeType.LeftHorizontal))
-                return _pipes.GetPipe(PipeType.LeftVertical);
+            PipeType pType = PipeType.VerticalLeft;
+            if (pipeType == PipeType.Vertical)
+            {
+                pType = Random.Range(0, 2) == 0 ? PipeType.VerticalLeft : PipeType.VerticalRight;
+            }
+            else if (pipeType == PipeType.LeftHorizontal)
+            {
+                pType = PipeType.LeftVertical;
+            }
             else
-                return _pipes.GetPipe(PipeType.RightVertical);
+            {
+                pType = PipeType.RightVertical;
+            }
+            return GetPipe(pType);
         }
     }
 }

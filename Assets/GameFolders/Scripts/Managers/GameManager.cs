@@ -18,7 +18,7 @@ namespace RiskyPipe3D
         private void Start()
         {
             _level.LoadLevel();
-            _level.LoadTraps();
+            //_level.LoadTraps();
         }
 
     }
