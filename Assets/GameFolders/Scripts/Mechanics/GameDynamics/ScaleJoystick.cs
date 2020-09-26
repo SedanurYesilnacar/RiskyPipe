@@ -11,7 +11,7 @@ namespace RiskyPipe3D.GameDynamics
         }
         public void Execute()
         {
-            _scaleVertical.GetTransform().localScale += Vector3.one * _scaleVertical.GetVertical() * _scaleVertical.GetScaleSpeed() * Time.fixedDeltaTime;
+            _scaleVertical.GetTransform().localScale += new Vector3(1,1,0) * _scaleVertical.GetVertical() * _scaleVertical.GetScaleSpeed() * Time.fixedDeltaTime;
             if (_scaleVertical.GetTransform().localScale.x > _scaleVertical.GetMaxScale().x)
                 _scaleVertical.GetTransform().localScale = _scaleVertical.GetMaxScale();
             if (_scaleVertical.GetTransform().localScale.x < _scaleVertical.GetMinScale().x)

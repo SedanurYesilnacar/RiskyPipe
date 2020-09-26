@@ -27,6 +27,7 @@
                 GetComponent<BoxCollider>().enabled = false;
                 playerController.SetCenterObject(null);
                 playerController.SetPosition(EndPoint.position);
+                playerController.SpeedUp();
             }
         }
 
