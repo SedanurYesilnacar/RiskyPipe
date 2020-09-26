@@ -11,10 +11,8 @@
         public PipeType BeforePipeType { get => _beforePipeType; }
         [SerializeField] private PipeType _afterPipeType;
         public PipeType AfterPipeType { get => _afterPipeType; }
-        [SerializeField] private PipeType _pipeType;
-        public PipeType PipeType { get => _pipeType; }
-        [SerializeField] private Transform _endPoint;
-        public Transform EndPoint { get => _endPoint; }
+        
+      
         public void SetObject(Pipe before = null)
         {
             if(before == null)

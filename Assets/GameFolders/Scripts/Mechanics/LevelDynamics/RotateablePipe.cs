@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace RiskyPipe3D.LevelDynamics
 {
-    public class RotateablePipe : Pipe
+    public class RotateablePipe : BasePipe
     {
         public void SetRotation(Direction direction)
         {

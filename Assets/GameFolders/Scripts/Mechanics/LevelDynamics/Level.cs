@@ -7,9 +7,9 @@
 
     public class Level
     {
-        private List<Pipe> _pipes;
+        private List<BasePipe> _pipes;
 
-        private List<Pipe> _pointPipes;
+        private List<BasePipe> _pointPipes;
 
         private List<Trap> _traps;
 
@@ -23,26 +23,26 @@
         public Level(int length)
         {
             _lenght = length;
-            _pipes = new List<Pipe>();
-            _pointPipes = new List<Pipe>();
+            _pipes = new List<BasePipe>();
+            _pointPipes = new List<BasePipe>();
             _traps = new List<Trap>();
         }
 
         public void Initialize()
         {
-            Pipe currentPipe = PipeFactory.Instance.GetPipe(PipeType.Vertical);
+            Pipe currentPipe = PipeFactory.Instance.GetPipe(PipeType.Vertical) as Pipe;
             while(_lenght-- > 0)
             {
-                currentPipe = PipeFactory.Instance.GetPipe(currentPipe.AfterPipeType);
+                currentPipe = PipeFactory.Instance.GetPipe(currentPipe.AfterPipeType) as Pipe;
                 int rand = Random.Range(randomMinLenght, randomMaxLength);
                 for(int i = 0; i < rand; i++)
                 {
-                    Pipe pipe = MonoBehaviour.Instantiate(currentPipe).GetComponent<Pipe>();
+                    BasePipe pipe = MonoBehaviour.Instantiate(currentPipe).GetComponent<Pipe>();
                     _pipes.Add(pipe);
                     _lenght--;
                 }
-                currentPipe = PipeFactory.Instance.GetDirectionPipe(currentPipe.PipeType);
-                _pipes.Add(MonoBehaviour.Instantiate(currentPipe).GetComponent<Pipe>());
+                currentPipe = PipeFactory.Instance.GetDirectionPipe(currentPipe.PipeType) as Pipe;
+                _pipes.Add(MonoBehaviour.Instantiate(currentPipe).GetComponent<BasePipe>());
             }
             // TODO : Add finish stage
         }
@@ -53,11 +53,11 @@
                 return;
             for(int i = 1; i < _pipes.Count; i++)
             {
-                _pipes[i].SetObject(_pipes[i - 1]);
+                ((Pipe)_pipes[i]).SetObject((Pipe)_pipes[i - 1]);
             }
         }
 
-        public void LoadTraps()
+        /*public void LoadTraps()
         {
             for(int i = 0; i<5; i++)
             {
@@ -72,7 +72,7 @@
                 trap.SetRotation(currentPipe.PipeType);
                 trap.SetScale(Random.Range(2, 5));
             }
-        }
+        }*/
 
     }
 }

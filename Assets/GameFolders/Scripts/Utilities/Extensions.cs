@@ -7,9 +7,9 @@
 
     public static class Extensions
     {
-        public static Pipe GetPipe(this List<Pipe> pipes, PipeType pipeType)
+        public static BasePipe GetPipe(this List<BasePipe> pipes, PipeType pipeType)
         {
-            foreach (Pipe pipe in pipes)
+            foreach (BasePipe pipe in pipes)
             {
                 if (pipe.PipeType.Equals(pipeType))
                 {
@@ -19,10 +19,10 @@
             return pipes[0];
         }
 
-        public static Pipe GetDirectionPipe(this List<Pipe> pipes)
+        public static BasePipe GetDirectionPipe(this List<BasePipe> pipes)
         {
-            List<Pipe> diretionPipes = new List<Pipe>();
-            foreach(Pipe p in pipes)
+            List<BasePipe> diretionPipes = new List<BasePipe>();
+            foreach(BasePipe p in pipes)
             {
                 if (p.PipeType.Equals(PipeType.VerticalLeft) || p.PipeType.Equals(PipeType.VerticalRight))
                     diretionPipes.Add(p);

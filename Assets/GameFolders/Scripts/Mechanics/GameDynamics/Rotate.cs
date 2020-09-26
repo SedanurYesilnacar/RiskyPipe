@@ -26,6 +26,7 @@ namespace RiskyPipe3D.GameDynamics
                 return;
             }
             _rotate.GetTransform().RotateAround(_rotate.GetCenterObject(), Vector3.up * (_rotate.GetDirection() == Enums.Direction.Right ? 1 : -1), _rotate.GetTurnSpeed());
+            Debug.Log(_toRotation);
         }
     }
 }
