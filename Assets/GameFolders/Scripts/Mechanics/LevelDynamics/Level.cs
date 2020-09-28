@@ -13,6 +13,8 @@
 
         private List<Trap> _traps;
 
+
+
         private int _lenght;
 
         Direction direction = Direction.Forward;
