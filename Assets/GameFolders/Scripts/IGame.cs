@@ -2,11 +2,12 @@
 {
     public interface IGame
     {
-        void InitializeGame();
-        void LoadGameObjects();
+        PlayerView GetPlayer();
         void LoadGame();
         void StartGame();
-        void PuaseGame();
+        void NextLevel();
+        void RestartLevel();
+        void PauseGame();
         void EndGame();
     }
 }

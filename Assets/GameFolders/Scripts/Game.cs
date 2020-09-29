@@ -1,35 +1,55 @@
 ﻿namespace RiskyPipe3D
 {
+    using RiskyPipe3D.LevelDynamics;
+    using RiskyPipe3D.Scripts.Managers;
+    using UnityEngine;
+
     public class Game : IGame
     {
-        private FileManager _fileManager;
+        public static IGame Instance { get; private set; } = new Game();
         public PlayerView PlayerView { get; private set; }
+        private ILevel _currentLevel;
 
-        public void InitializeGame()
+        private Game()
         {
-            throw new System.NotImplementedException();
-        }
-        public void LoadGameObjects()
-        {
-            throw new System.NotImplementedException();
+            PlayerView = FileManager.Instance.GetPlayer();
         }
         public void LoadGame()
         {
-            throw new System.NotImplementedException();
+            _currentLevel = new Level(PlayerView.Level);
+            _currentLevel.Initialize();
+            _currentLevel.LoadLevel();
         }
-
         public void EndGame()
         {
-            throw new System.NotImplementedException();
+            Application.Quit();
         }
-
         public void PuaseGame()
         {
-            throw new System.NotImplementedException();
         }
         public void StartGame()
         {
-            throw new System.NotImplementedException();
+        }
+
+        public void NextLevel()
+        {
+            PlayerView.Level += 1;
+            _currentLevel.EndLevel();
+            LoadGame();
+        }
+
+        public void RestartLevel()
+        {
+            _currentLevel.RestartLevel();
+        }
+
+        public void PauseGame()
+        {
+        }
+
+        public PlayerView GetPlayer()
+        {
+            return PlayerView;
         }
     }
 }

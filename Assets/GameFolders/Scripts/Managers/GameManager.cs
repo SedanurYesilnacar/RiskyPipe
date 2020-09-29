@@ -1,4 +1,7 @@
-﻿using RiskyPipe3D.LevelDynamics;
+﻿using RiskyPipe3D.Enums;
+using RiskyPipe3D.LevelDynamics;
+using RiskyPipe3D.Scripts.Managers;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,20 +9,44 @@ namespace RiskyPipe3D
 {
     public class GameManager : MonoBehaviour
     {
-        private Level _level;
-        [SerializeField] private int _levelSize;
-
         private void Awake()
         {
-            _level = new Level(_levelSize);
-            _level.Initialize();
+            Game.Instance.LoadGame();
+            EventManager.Instance.GameStateChanged += OnGameStateChanged;
         }
 
-        private void Start()
+        private void OnGameStateChanged(GameState gameState)
         {
-            _level.LoadLevel();
-            //_level.LoadTraps();
+            switch (gameState)
+            {
+                case GameState.Pause:
+                    Game.Instance.PauseGame();
+                    break;
+                case GameState.Playing:
+                    Game.Instance.StartGame();
+                    break;
+                case GameState.Restart:
+                    Game.Instance.RestartLevel();
+                    break;
+                case GameState.Win:
+                    
+                    break;
+                case GameState.Lose:
+                    Game.Instance.RestartLevel();
+                    break;
+                case GameState.NextStage:
+                    Game.Instance.NextLevel();
+                    break;
+            }
         }
 
+        /*
+        Playing,
+        Win,
+        Lose,
+        Pause,
+        Restart
+         */
+         
     }
 }

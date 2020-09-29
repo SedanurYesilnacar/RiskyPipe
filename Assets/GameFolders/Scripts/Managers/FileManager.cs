@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class FileManager
 {
-    public FileManager() { }
+    public static FileManager Instance { get; private set; } = new FileManager();
+    private FileManager() { }
     private void SetHandle(PlayerView playerView)
     {
         playerView.ValueChanged += OnValueChanged;
