@@ -34,5 +34,10 @@
         public event OnPipeDeActivated PipeDeActivated;
         public void PipeDeActivate(BasePipe pipe) => PipeDeActivated?.Invoke(pipe);
 
+
+        public delegate void OnLevelChanged(int level);
+        public event OnLevelChanged LevelChanged;
+        public void LevelChange(int level) => LevelChanged?.Invoke(level);
+
     }
 }

@@ -33,6 +33,7 @@
             _pointPipes = new List<BasePipe>();
             _traps = new List<Trap>();
             EventManager.Instance.ScoreIncreased += OnScoreIncreased;
+
         }
 
         private void OnScoreIncreased()
@@ -42,6 +43,8 @@
                 Game.Instance.GetPlayer().HighScore = _score;
             EventManager.Instance.ScoreChange(_score);
         }
+
+      
 
         private int CalculateLenght()
         {

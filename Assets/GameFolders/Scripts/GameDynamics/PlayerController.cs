@@ -15,6 +15,8 @@
         [SerializeField] private float _maxScale = 2f;
         [SerializeField] private float _minScale = 1f;
 
+        [SerializeField] private GameObject _confettiObject;
+
         Rigidbody _rigidbody;
 
         private bool _isTap;
@@ -67,16 +69,19 @@
             {
                 SetPosition(_startingPosition);
                 transform.rotation = Quaternion.identity;
+                
             }
             else if (gameState.Equals(GameState.NextStage))
             {
                 _mechanic = ScaleMechanic.Joystick;
                 transform.rotation = Quaternion.identity;
                 SetPosition(_startingPosition);
+                _confettiObject.SetActive(false);
             }
             else
             {
                 SpeedDown();
+                _confettiObject.SetActive(true);
             }
         }
 

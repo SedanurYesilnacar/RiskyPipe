@@ -9,6 +9,7 @@
         public static IGame Instance { get; private set; } = new Game();
         public PlayerView PlayerView { get; private set; }
         private ILevel _currentLevel;
+        public int Level { get; set; }
 
         private Game()
         {
@@ -41,6 +42,7 @@
         public void RestartLevel()
         {
             _currentLevel.RestartLevel();
+   
         }
 
         public void PauseGame()
@@ -51,5 +53,7 @@
         {
             return PlayerView;
         }
+
+
     }
 }

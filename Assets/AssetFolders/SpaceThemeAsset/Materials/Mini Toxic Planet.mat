@@ -25,15 +25,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Fresnel_Size: 4
-    - Vector1_A21C89C9: 3
-    - Vector1_A72AA7D2: 1
+    - Fresnel_Size: 5
+    - Vector1_A21C89C9: 30
+    - Vector1_A72AA7D2: 0.1
     - Vector1_B50CD57B: 3.48
-    - Vector1_CAA63419: 5
+    - Vector1_CAA63419: 2
     m_Colors:
-    - Color_79C52E2C: {r: 1, g: 0.9165582, b: 0.9009434, a: 0}
-    - Color_F4CA4056: {r: 0, g: 0, b: 0, a: 0}
-    - Fresnel_Color: {r: 0.09257108, g: 3.9245284, b: 0, a: 0}
+    - Color_79C52E2C: {r: 0, g: 0, b: 0, a: 0}
+    - Color_F4CA4056: {r: 1, g: 0.95577174, b: 0.19339621, a: 0}
+    - Fresnel_Color: {r: 3.3837433, g: 2.8370104, b: 0.21259122, a: 0}
 --- !u!114 &4641337225992018019
 MonoBehaviour:
   m_ObjectHideFlags: 11

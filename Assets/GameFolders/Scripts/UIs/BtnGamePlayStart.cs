@@ -7,6 +7,9 @@
     using UnityEngine.EventSystems;
     public class BtnGamePlayStart : MonoBehaviour, IPointerDownHandler
     {
+
+        
+
         private void Start()
         {
             EventManager.Instance.GameStateChanged += OnGameStateChanged;

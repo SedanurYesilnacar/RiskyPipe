@@ -22,7 +22,7 @@ namespace RiskyPipe3D.GameDynamics
                 {
                     _scaleValue = 0;
                 }
-                _scaleValue += 5f * Time.fixedDeltaTime;
+                _scaleValue += 10f * Time.fixedDeltaTime;
             }
             else
             {
