@@ -21,8 +21,13 @@
         {
             if (gameState.Equals(GameState.Playing) || gameState.Equals(GameState.Win))
             {
-                OnScoreChanged(0);
                 gameObject.SetActive(true);
+                
+            
+            }else if (gameState.Equals(GameState.Restart) || gameState.Equals(GameState.NextStage))
+            {
+                OnScoreChanged(0);
+                EventManager.Instance.ScoreReset();
             }
             else
                 gameObject.SetActive(false);

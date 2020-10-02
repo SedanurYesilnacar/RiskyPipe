@@ -23,7 +23,7 @@
         Direction direction = Direction.Forward;
 
         private int randomMinLenght = 4;
-        private int randomMaxLength = 8;
+        private int randomMaxLength = 15;
 
         public Level(int level)
         {
@@ -33,6 +33,7 @@
             _pointPipes = new List<BasePipe>();
             _traps = new List<Trap>();
             EventManager.Instance.ScoreIncreased += OnScoreIncreased;
+            EventManager.Instance.ScoreResettt += ResetScore;
 
         }
 
@@ -43,12 +44,15 @@
                 Game.Instance.GetPlayer().HighScore = _score;
             EventManager.Instance.ScoreChange(_score);
         }
+        private void ResetScore()
+        {
+            _score = 0;
+        }
 
-      
 
         private int CalculateLenght()
         {
-            return 20;
+            return 50;
         }
 
         public void Initialize()
@@ -80,11 +84,12 @@
             {
                 _pipes[i].SetObject(_pipes[i - 1]);
             }
+            LoadTraps();
         }
 
         public void RestartLevel()
         {
-
+            EndLevel();
         }
 
         public void EndLevel()
@@ -96,22 +101,38 @@
                 EventManager.Instance.PipeDeActivate(pipe);
             }
         }
-        /*public void LoadTraps()
-        {
-            for(int i = 0; i<5; i++)
+
+
+        public void LoadTraps()
+        { 
+
+        Debug.Log(_pipes.Count);
+            for(int i = 3; i< _pipes.Count; i+=2)
             {
-                Trap trap = MonoBehaviour.Instantiate(TrapFactory.Instance.GetTrap()).GetComponent<Trap>();
-                _traps.Add(trap);
-                Pipe currentPipe = _pipes[Random.Range(0, _pipes.Count)];
-                while(currentPipe as MidPipe)
+                Debug.Log("a");
+                BasePipe currentPipe = _pipes[i];
+
+
+                if (!(_pipes[i-1] as MidPipe || _pipes[i + 1] as MidPipe))
                 {
-                    currentPipe = _pipes[Random.Range(0, _pipes.Count)];
+                    if (currentPipe.PipeType == PipeType.LeftHorizontal || currentPipe.PipeType == PipeType.RightHorizontal || currentPipe.PipeType == PipeType.Vertical)
+                    {
+                        Debug.Log("a2");
+                        Trap trap = MonoBehaviour.Instantiate(TrapFactory.Instance.GetTrap()).GetComponent<Trap>();
+                        _traps.Add(trap);
+                        trap.SetPosition(currentPipe.transform.position);
+                        trap.SetRotation(currentPipe.PipeType);
+                        if (!trap.CompareTag("EnergyTrap"))
+                        {
+                            trap.SetScale(Random.Range(2, 5));
+                        }
+                    }
                 }
-                trap.SetPosition(currentPipe.transform.position);
-                trap.SetRotation(currentPipe.PipeType);
-                trap.SetScale(Random.Range(2, 5));
+
+                
+                
             }
-        }*/
+        }
 
     }
 }

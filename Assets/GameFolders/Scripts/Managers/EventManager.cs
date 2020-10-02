@@ -47,5 +47,9 @@
         public event OnTapTapChanged TapTapChanged;
         public void TapTapChange(bool isActive) => TapTapChanged?.Invoke(isActive);
 
+        public delegate void OnScoreReset();
+        public event OnScoreReset ScoreResettt;
+        public void ScoreReset() => ScoreResettt?.Invoke();
+
     }
 }

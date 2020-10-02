@@ -31,6 +31,7 @@
         public void OnPointerDown(PointerEventData eventData)
         {
             EventManager.Instance.GameStateChange(GameState.NextStage);
+            GameManager.Instance.SetRandomPipeColor();
         }
     }
 }

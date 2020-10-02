@@ -67,9 +67,12 @@
                 SpeedUp();
             }else if (gameState.Equals(GameState.Restart))
             {
-                SetPosition(_startingPosition);
+                _mechanic = ScaleMechanic.Joystick;
                 transform.rotation = Quaternion.identity;
-                
+                SetPosition(_startingPosition);
+                _confettiObject.SetActive(false);
+                SpeedDown();
+
             }
             else if (gameState.Equals(GameState.NextStage))
             {

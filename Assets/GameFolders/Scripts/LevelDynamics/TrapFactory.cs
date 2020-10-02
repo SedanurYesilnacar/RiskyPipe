@@ -26,7 +26,7 @@ namespace RiskyPipe3D.LevelDynamics
 
         public Trap GetTrap()
         {
-            return _traps[0];
+            return _traps[UnityEngine.Random.Range(0,_traps.Count)];
         }
     }
 }

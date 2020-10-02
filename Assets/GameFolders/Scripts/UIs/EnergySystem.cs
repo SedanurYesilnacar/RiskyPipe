@@ -1,4 +1,5 @@
-﻿using RiskyPipe3D.Scripts.Managers;
+﻿using RiskyPipe3D.Enums;
+using RiskyPipe3D.Scripts.Managers;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,7 +18,16 @@ namespace RiskyPipe3D.UIs
         private void Start()
         {
             EventManager.Instance.EnergyChanged += OnEnergyChanged;
+            EventManager.Instance.GameStateChanged += GameStateChanged;
             ResetObject();
+        }
+
+        private void GameStateChanged(GameState gameState)
+        {
+            if (gameState.Equals(GameState.NextStage))
+            {
+                ResetObject();
+            }
         }
 
         private void Update()
@@ -32,6 +42,7 @@ namespace RiskyPipe3D.UIs
         private void OnDisable()
         {
             EventManager.Instance.EnergyChanged -= OnEnergyChanged;
+            
         }
 
         public void IncreaseEnergy(float amount)
@@ -52,12 +63,16 @@ namespace RiskyPipe3D.UIs
         {
             if (yValue<=0)
             {
-                Debug.Log("Game Over Coding");
-                IncreaseEnergy(0.3f);
+                _isPlaying = false;
+                EventManager.Instance.MechanicChange(ScaleMechanic.None);
+                EventManager.Instance.GameStateChange(GameState.Restart);
+
+                GameManager.Instance.GameOverPanel(true);
+                //IncreaseEnergy(0.3f);
             }
         }
 
-       private void ResetObject()
+       public void ResetObject()
         {
             _isPlaying = false;
             _energyFrontImage.localScale = new Vector3(1, 1, 1);

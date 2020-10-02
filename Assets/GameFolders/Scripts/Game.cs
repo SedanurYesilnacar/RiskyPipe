@@ -32,11 +32,17 @@
         {
         }
 
-        public void NextLevel()
+        public void NextLevel(bool value)
         {
-            PlayerView.Level += 1;
-            _currentLevel.EndLevel();
-            LoadGame();
+            if (!value)
+            {
+                PlayerView.Level += 1;
+                _currentLevel.EndLevel();
+                LoadGame();
+            }
+
+            
+           
         }
 
         public void RestartLevel()

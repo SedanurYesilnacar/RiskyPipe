@@ -25,11 +25,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Fresnel_Size: 4
-    - Vector1_A21C89C9: 103.03
+    - Fresnel_Size: 5.79
+    - Vector1_A21C89C9: 15
     - Vector1_A72AA7D2: 1
     - Vector1_B50CD57B: 1
-    - Vector1_CAA63419: 0.12
+    - Vector1_CAA63419: 2
     m_Colors:
     - Color_79C52E2C: {r: 0, g: 0.9411765, b: 1.4980392, a: 0}
     - Color_F4CA4056: {r: 0.013088653, g: 0, b: 0.80784315, a: 0}

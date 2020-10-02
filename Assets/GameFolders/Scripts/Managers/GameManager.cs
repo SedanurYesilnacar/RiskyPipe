@@ -9,10 +9,29 @@ namespace RiskyPipe3D
 {
     public class GameManager : MonoBehaviour
     {
+        public static GameManager Instance;
+        [SerializeField] private Color[] _pipeColors;
+        [SerializeField] private Material _pipeMaterial;
+        [SerializeField] private GameObject _againObject;
+        public bool _isRestaring = false;
+
+
         private void Awake()
         {
+            Instance = this;
             Game.Instance.LoadGame();
             EventManager.Instance.GameStateChanged += OnGameStateChanged;
+        }
+
+        private void Start()
+        {
+            SetRandomPipeColor();
+            GameOverPanel(false);
+        }
+
+        public void SetRandomPipeColor()
+        {
+            _pipeMaterial.color = _pipeColors[UnityEngine.Random.Range(0, _pipeColors.Length)];
         }
 
         private void OnGameStateChanged(GameState gameState)
@@ -26,19 +45,29 @@ namespace RiskyPipe3D
                     Game.Instance.StartGame();
                     break;
                 case GameState.Restart:
-                    Game.Instance.RestartLevel();
+                    Game.Instance.NextLevel(true);
+
                     break;
                 case GameState.Win:
-                    
+
                     break;
                 case GameState.Lose:
                     Game.Instance.RestartLevel();
                     break;
                 case GameState.NextStage:
-                    Game.Instance.NextLevel();
+                    Game.Instance.NextLevel(_isRestaring);
+                    
                     break;
             }
         }
+
+
+        public void GameOverPanel(bool isActive)
+        {
+            _againObject.SetActive(isActive);
+        }
+
+
 
         /*
         Playing,
@@ -47,6 +76,6 @@ namespace RiskyPipe3D
         Pause,
         Restart
          */
-         
+
     }
 }
