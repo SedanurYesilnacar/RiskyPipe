@@ -39,5 +39,13 @@
         public event OnLevelChanged LevelChanged;
         public void LevelChange(int level) => LevelChanged?.Invoke(level);
 
+        public delegate void OnEnergyChanged(bool isActive);
+        public event OnEnergyChanged EnergyChanged;
+        public void EnergyChange(bool isActive) => EnergyChanged?.Invoke(isActive);
+
+        public delegate void OnTapTapChanged(bool isActive);
+        public event OnTapTapChanged TapTapChanged;
+        public void TapTapChange(bool isActive) => TapTapChanged?.Invoke(isActive);
+
     }
 }

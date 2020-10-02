@@ -17,9 +17,15 @@
         private void OnGameStateChanged(GameState gameState)
         {
             if (gameState.Equals(GameState.Win))
+            {
                 gameObject.SetActive(true);
+                
+            }
             else
+            {
                 gameObject.SetActive(false);
+            }
+                
         }
 
         public void OnPointerDown(PointerEventData eventData)

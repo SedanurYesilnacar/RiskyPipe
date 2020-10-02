@@ -26,6 +26,8 @@
         public void OnPointerDown(PointerEventData eventData)
         {
             EventManager.Instance.GameStateChange(GameState.Playing);
+            EventManager.Instance.EnergyChange(true);
+            EventManager.Instance.TapTapChange(false);
         }
     }
 }

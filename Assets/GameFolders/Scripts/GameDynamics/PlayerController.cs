@@ -92,8 +92,11 @@
                 case ScaleMechanic.Joystick:
                     break;
                 case ScaleMechanic.TapTap:
+                    EventManager.Instance.EnergyChange(false);
+                    EventManager.Instance.TapTapChange(true);
                     break;
                 default:
+                    EventManager.Instance.TapTapChange(false);
                     break;
             }
             _mechanic = scaleMechanic;

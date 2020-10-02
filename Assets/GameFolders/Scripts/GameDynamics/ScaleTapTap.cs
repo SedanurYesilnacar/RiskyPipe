@@ -26,7 +26,7 @@ namespace RiskyPipe3D.GameDynamics
             }
             else
             {
-                _scaleValue -= 0.5f * Time.fixedDeltaTime;
+                _scaleValue -= 0.4f * Time.fixedDeltaTime;
             }
             
             _scaleTapTap.GetTransform().localScale +=  _scaleValue * Time.fixedDeltaTime * new Vector3(1,1,1);
