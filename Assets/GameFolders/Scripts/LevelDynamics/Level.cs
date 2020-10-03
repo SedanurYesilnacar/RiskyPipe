@@ -5,6 +5,7 @@
     using System.Linq;
     using RiskyPipe3D.Enums;
     using RiskyPipe3D.Scripts.Managers;
+    using RiskyPipe3D.Extensions;
 
     public class Level : ILevel
     {
@@ -12,7 +13,8 @@
 
         private List<BasePipe> _pointPipes;
 
-        private List<Trap> _traps;
+        private List<EnvironmentObject> _environments;
+
 
 
 
@@ -31,7 +33,7 @@
             _lenght = CalculateLenght();
             _pipes = new List<BasePipe>();
             _pointPipes = new List<BasePipe>();
-            _traps = new List<Trap>();
+            _environments = new List<EnvironmentObject>();
             EventManager.Instance.ScoreIncreased += OnScoreIncreased;
             EventManager.Instance.ScoreResettt += ResetScore;
 
@@ -89,7 +91,7 @@
 
         public void RestartLevel()
         {
-            EndLevel();
+            
         }
 
         public void EndLevel()
@@ -100,39 +102,52 @@
                 pipe.DeActive();
                 EventManager.Instance.PipeDeActivate(pipe);
             }
+            foreach(EnvironmentObject environmentObject in _environments)
+            {
+                environmentObject.Deactive();
+                EventManager.Instance.EnvironmentObjectDeactivate(environmentObject);
+            }
         }
 
 
         public void LoadTraps()
-        { 
-
-        Debug.Log(_pipes.Count);
-            for(int i = 3; i< _pipes.Count; i+=2)
+        {
+            int currentIndex = 3;
+            while(currentIndex < _pipes.Count - 1)
             {
-                Debug.Log("a");
-                BasePipe currentPipe = _pipes[i];
-
-
-                if (!(_pipes[i-1] as MidPipe || _pipes[i + 1] as MidPipe))
+                int lastIndex = _pipes.GetMidPipeIndex(currentIndex);
+                if(lastIndex == -1)
                 {
-                    if (currentPipe.PipeType == PipeType.LeftHorizontal || currentPipe.PipeType == PipeType.RightHorizontal || currentPipe.PipeType == PipeType.Vertical)
-                    {
-                        Debug.Log("a2");
-                        Trap trap = MonoBehaviour.Instantiate(TrapFactory.Instance.GetTrap()).GetComponent<Trap>();
-                        _traps.Add(trap);
-                        trap.SetPosition(currentPipe.transform.position);
-                        trap.SetRotation(currentPipe.PipeType);
-                        if (!trap.CompareTag("EnergyTrap"))
-                        {
-                            trap.SetScale(Random.Range(2, 5));
-                        }
-                    }
+                    break;
                 }
+                bool isEnergyPlaced = false;
+                for(int i = currentIndex; i < lastIndex; i++)
+                {
+                    if(Random.Range(0,5) == 0)
+                    {
+                        Trap trap;
+                        trap = (Trap)EnvironmentFactory.Instance.GetEnvironmentObject(EnvironmentType.Trap);
+                        trap.SetPosition(_pipes[i].EndPoint.position);
+                        trap.SetRotation(_pipes[i].PipeType);
+                        trap.SetScale();
+                        _environments.Add(trap);
+                    }
+                    if (!isEnergyPlaced)
+                    {
+                        Energy energy;
+                        energy = (Energy)EnvironmentFactory.Instance.GetEnvironmentObject(EnvironmentType.Energy);
+                        energy.SetPosition(_pipes[i].EndPoint.position);
+                        energy.SetRotation(_pipes[i].PipeType);
+                        energy.SetScale(lastIndex - i);
+                        _environments.Add(energy);
+                        isEnergyPlaced = true;
+                    }
 
-                
-                
+                }
+                currentIndex = lastIndex +1;
             }
         }
+
 
     }
 }

@@ -15,18 +15,41 @@ namespace RiskyPipe3D.UIs
         private bool _isPlaying = false;
         private Vector3 _defaultVector;
 
-        private void Start()
+
+        private void Awake()
         {
-            EventManager.Instance.EnergyChanged += OnEnergyChanged;
             EventManager.Instance.GameStateChanged += GameStateChanged;
+            EventManager.Instance.EnergyIncreased += OnEnergyIncreased;
+            EventManager.Instance.MechanicChanged += OnMechanicChanged;
+            gameObject.SetActive(false);
             ResetObject();
+        }
+
+        private void OnMechanicChanged(ScaleMechanic scaleMechanic)
+        {
+            if(!scaleMechanic.Equals(ScaleMechanic.Joystick))
+            {
+                gameObject.SetActive(false);
+            }
+            
+        }
+
+        private void OnEnergyIncreased()
+        {
+            IncreaseEnergy();
         }
 
         private void GameStateChanged(GameState gameState)
         {
-            if (gameState.Equals(GameState.NextStage))
+            if (gameState.Equals(GameState.Playing))
+            {
+                _isPlaying = true;
+                gameObject.SetActive(true);
+            }
+            else
             {
                 ResetObject();
+                gameObject.SetActive(false);
             }
         }
 
@@ -34,20 +57,21 @@ namespace RiskyPipe3D.UIs
         {
             if (!_isPlaying) return;
 
-            _defaultVector = new Vector3(0, 1, 0);
-            _energyFrontImage.localScale -= _defaultVector * _energySpeed/10000;
+            _defaultVector = Vector3.up;
+            EnergyDown();
             CheckIfGameOver(_energyFrontImage.localScale.y);
         }
 
-        private void OnDisable()
+        private void EnergyDown()
         {
-            EventManager.Instance.EnergyChanged -= OnEnergyChanged;
-            
+            _energyFrontImage.localScale -= _defaultVector * _energySpeed * Time.deltaTime;
         }
 
-        public void IncreaseEnergy(float amount)
+        
+
+        public void IncreaseEnergy()
         {
-            _energyFrontImage.localScale = new Vector3(_energyFrontImage.localScale.x,_energyFrontImage.localScale.y+ amount, _energyFrontImage.localScale.z);
+            _energyFrontImage.localScale += _defaultVector * _energySpeed * Time.deltaTime * 5;
             CheckIfObjectOverMax(_energyFrontImage.localScale.y);
         }
 
@@ -65,9 +89,7 @@ namespace RiskyPipe3D.UIs
             {
                 _isPlaying = false;
                 EventManager.Instance.MechanicChange(ScaleMechanic.None);
-                EventManager.Instance.GameStateChange(GameState.Restart);
-
-                GameManager.Instance.GameOverPanel(true);
+                EventManager.Instance.GameStateChange(GameState.Lose);
                 //IncreaseEnergy(0.3f);
             }
         }
@@ -76,20 +98,8 @@ namespace RiskyPipe3D.UIs
         {
             _isPlaying = false;
             _energyFrontImage.localScale = new Vector3(1, 1, 1);
-            gameObject.transform.localScale = new Vector3(0, 0, 0);
         }
 
-        private void OnEnergyChanged(bool isActive)
-        {
-            if (isActive)
-            {
-                _isPlaying = isActive;
-                gameObject.transform.localScale = new Vector3(1,1,1);
-            }
-            else
-            {
-                ResetObject();
-            }
-        }
+        
     }
 }

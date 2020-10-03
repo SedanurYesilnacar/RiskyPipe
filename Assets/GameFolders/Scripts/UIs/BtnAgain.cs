@@ -8,15 +8,27 @@
 
     public class BtnAgain : MonoBehaviour, IPointerDownHandler
     {
-       
+        private void Awake()
+        {
+            EventManager.Instance.GameStateChanged += OnGameStateChanged;
+            gameObject.transform.parent.gameObject.SetActive(false);
+        }
+
+        private void OnGameStateChanged(GameState gameState)
+        {
+            if(gameState.Equals(GameState.Lose))
+            {
+                gameObject.transform.parent.gameObject.SetActive(true);
+            }
+            else
+            {
+                gameObject.transform.parent.gameObject.SetActive(false);
+            }
+        }
+
         public void OnPointerDown(PointerEventData eventData)
         {
-            
-            GameManager.Instance.SetRandomPipeColor();
-            GameManager.Instance.GameOverPanel(false);
-            GameManager.Instance._isRestaring = true;
-            EventManager.Instance.GameStateChange(GameState.NextStage);
-
+            EventManager.Instance.GameStateChange(GameState.Restart);
         }
     }
 }

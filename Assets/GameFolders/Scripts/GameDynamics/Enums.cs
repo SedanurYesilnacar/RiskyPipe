@@ -39,5 +39,11 @@
         PointPipe
     }
 
+    public enum EnvironmentType
+    {
+        Trap,
+        Energy,
+        RingTrap
+    }
 
 }

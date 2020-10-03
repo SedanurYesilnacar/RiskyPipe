@@ -5,5 +5,6 @@
         public int level;
         public int totalCoin;
         public int highScore;
+        public float defaultSpeed;
     }
 }

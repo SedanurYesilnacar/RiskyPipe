@@ -1,6 +1,7 @@
 ﻿using RiskyPipe3D;
 using System;
 using UnityEngine;
+using RiskyPipe3D.Scripts.Managers;
 
 public class FileManager
 {
@@ -22,6 +23,7 @@ public class FileManager
         p.highScore = playerView.HighScore;
         p.level = playerView.Level;
         p.totalCoin = playerView.TotalCoin;
+        p.defaultSpeed = playerView.DefaultSpeed;
         PlayerPrefs.SetString("Player", JsonUtility.ToJson(p));
     }
 
@@ -31,10 +33,14 @@ public class FileManager
         if (PlayerPrefs.HasKey("Player"))
         {
             pView = new PlayerView(JsonUtility.FromJson<Player>(PlayerPrefs.GetString("Player")));
-            SetHandle(pView);
-            return pView;
         }
-        pView = new PlayerView(new Player() { highScore = 0, level = 1, totalCoin = 0 });
+        else
+        {
+            Player player = new Player() { highScore = 0, level = 1, totalCoin = 0, defaultSpeed = 4 };
+            pView = new PlayerView(player);
+            SavePlayer(pView);
+        }
+        EventManager.Instance.PlayerGott(pView);
         SetHandle(pView);
         return pView;
     }

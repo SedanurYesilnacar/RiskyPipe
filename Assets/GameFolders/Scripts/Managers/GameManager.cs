@@ -12,7 +12,6 @@ namespace RiskyPipe3D
         public static GameManager Instance;
         [SerializeField] private Color[] _pipeColors;
         [SerializeField] private Material _pipeMaterial;
-        [SerializeField] private GameObject _againObject;
         public bool _isRestaring = false;
 
 
@@ -26,7 +25,6 @@ namespace RiskyPipe3D
         private void Start()
         {
             SetRandomPipeColor();
-            GameOverPanel(false);
         }
 
         public void SetRandomPipeColor()
@@ -45,17 +43,18 @@ namespace RiskyPipe3D
                     Game.Instance.StartGame();
                     break;
                 case GameState.Restart:
-                    Game.Instance.NextLevel(true);
+                    SetRandomPipeColor();
+                    _isRestaring = true;
+                    //Game.Instance.NextLevel(true);
 
                     break;
                 case GameState.Win:
 
                     break;
                 case GameState.Lose:
-                    Game.Instance.RestartLevel();
                     break;
                 case GameState.NextStage:
-                    Game.Instance.NextLevel(_isRestaring);
+                    Game.Instance.NextLevel();
                     
                     break;
             }
@@ -64,7 +63,6 @@ namespace RiskyPipe3D
 
         public void GameOverPanel(bool isActive)
         {
-            _againObject.SetActive(isActive);
         }
 
 

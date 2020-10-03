@@ -29,5 +29,18 @@
             }
             return diretionPipes[new Random().Next(diretionPipes.Count)];
         }
+
+        public static int GetMidPipeIndex(this List<BasePipe> pipes, int currentIndex)
+        {
+            for(int i = currentIndex; i < pipes.Count; i++)
+            {
+                if(pipes[i] as MidPipe)
+                {
+                    return i;
+                }
+            }
+            return -1;
+
+        }
     }
 }

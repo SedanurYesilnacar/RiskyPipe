@@ -5,7 +5,7 @@
         PlayerView GetPlayer();
         void LoadGame();
         void StartGame();
-        void NextLevel(bool value);
+        void NextLevel();
         void RestartLevel();
         void PauseGame();
         void EndGame();

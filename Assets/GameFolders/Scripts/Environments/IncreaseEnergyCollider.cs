@@ -1,16 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RiskyPipe3D.Scripts.Managers;
 
 namespace RiskyPipe3D.Environments
 {
     public class IncreaseEnergyCollider : MonoBehaviour
     {
-        private void OnCollisionStay(Collision collision)
+        private void OnTriggerStay(Collider collider)
         {
-            if (collision.gameObject.CompareTag("Player"))
+            if(collider.CompareTag("Player"))
             {
-                Debug.Log("asfdad");
+                EventManager.Instance.EnergyIncrease();
             }
         }
     }

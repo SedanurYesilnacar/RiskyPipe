@@ -15,7 +15,6 @@
         [SerializeField] private float _maxScale = 2f;
         [SerializeField] private float _minScale = 1f;
 
-        [SerializeField] private GameObject _confettiObject;
 
         Rigidbody _rigidbody;
 
@@ -36,6 +35,8 @@
         private float _rotateValue;
 
         private Vector3 _startingPosition;
+
+        PlayerView playerView;
 
         // last rotation because must know before _rotation.Execute()
         private Vector3 _lastRotation = Vector3.zero;
@@ -58,6 +59,19 @@
             EventManager.Instance.MechanicChanged += OnMechanicChanged;
             OnMechanicChanged(ScaleMechanic.Joystick);
             EventManager.Instance.GameStateChanged += OnGameStateChanged;
+            EventManager.Instance.PlayerGot += OnPlayerGot;
+        }
+
+        private void OnPlayerGot(PlayerView playerView)
+        {
+            this.playerView = playerView;
+            _defaultSpeed = playerView.DefaultSpeed;
+            playerView.SpeedChanged += OnSpeedChanged;
+        }
+
+        private void OnSpeedChanged(float defaultSpeed)
+        {
+            _defaultSpeed = defaultSpeed;
         }
 
         private void OnGameStateChanged(GameState gameState)
@@ -70,7 +84,6 @@
                 _mechanic = ScaleMechanic.Joystick;
                 transform.rotation = Quaternion.identity;
                 SetPosition(_startingPosition);
-                _confettiObject.SetActive(false);
                 SpeedDown();
 
             }
@@ -79,12 +92,10 @@
                 _mechanic = ScaleMechanic.Joystick;
                 transform.rotation = Quaternion.identity;
                 SetPosition(_startingPosition);
-                _confettiObject.SetActive(false);
             }
             else
             {
                 SpeedDown();
-                _confettiObject.SetActive(true);
             }
         }
 

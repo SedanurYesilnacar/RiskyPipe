@@ -34,6 +34,11 @@
         public event OnPipeDeActivated PipeDeActivated;
         public void PipeDeActivate(BasePipe pipe) => PipeDeActivated?.Invoke(pipe);
 
+        public delegate void OnEnvironmentObjectDeactivated(EnvironmentObject environmentObject);
+        public event OnEnvironmentObjectDeactivated EnvironmentObjectDeactivated;
+
+        public void EnvironmentObjectDeactivate(EnvironmentObject environmentObject) => EnvironmentObjectDeactivated?.Invoke(environmentObject);
+
 
         public delegate void OnLevelChanged(int level);
         public event OnLevelChanged LevelChanged;
@@ -50,6 +55,16 @@
         public delegate void OnScoreReset();
         public event OnScoreReset ScoreResettt;
         public void ScoreReset() => ScoreResettt?.Invoke();
+
+        public delegate void OnPlayerGot(PlayerView playerView);
+        public event OnPlayerGot PlayerGot;
+
+        public void PlayerGott(PlayerView playerView) => PlayerGot?.Invoke(playerView);
+
+        public delegate void OnEnergyIncreased();
+        public event OnEnergyIncreased EnergyIncreased;
+
+        public void EnergyIncrease() => EnergyIncreased?.Invoke();
 
     }
 }

@@ -21,7 +21,7 @@
 
         private void OnGameStateChanged(GameState gameState)
         {
-            if (gameState.Equals(GameState.Pause) || gameState.Equals(GameState.NextStage))
+            if (gameState.Equals(GameState.Pause) || gameState.Equals(GameState.NextStage) || gameState.Equals(GameState.Restart))
                 gameObject.SetActive(true);
             else
                 gameObject.SetActive(false);
