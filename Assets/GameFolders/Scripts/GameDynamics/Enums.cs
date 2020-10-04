@@ -42,6 +42,7 @@
     public enum EnvironmentType
     {
         Trap,
+        Trap2,
         Energy,
         RingTrap
     }

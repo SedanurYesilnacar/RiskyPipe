@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8307823259095318096}
-  - component: {fileID: 728218245849065220}
+  - component: {fileID: 828367245304572253}
+  - component: {fileID: 1670706810869140850}
   m_Layer: 0
   m_Name: RingTrap
   m_TagString: Untagged
@@ -32,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &728218245849065220
+--- !u!114 &828367245304572253
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,9 +42,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 7116030624396679710}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba8d4c94c33c25241bb668d85aac3209, type: 3}
+  m_Script: {fileID: 11500000, guid: 4b947f5efb4a8e944a4a6e2996763d9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _environmentType: 3
+--- !u!65 &1670706810869140850
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7116030624396679710}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.48, y: 0.21, z: 0.23}
+  m_Center: {x: 0, y: 0.4, z: 0.12}
 --- !u!1 &8714995656472928343
 GameObject:
   m_ObjectHideFlags: 0

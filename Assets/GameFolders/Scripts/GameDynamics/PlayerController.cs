@@ -60,6 +60,7 @@
             OnMechanicChanged(ScaleMechanic.Joystick);
             EventManager.Instance.GameStateChanged += OnGameStateChanged;
             EventManager.Instance.PlayerGot += OnPlayerGot;
+            
         }
 
         private void OnPlayerGot(PlayerView playerView)

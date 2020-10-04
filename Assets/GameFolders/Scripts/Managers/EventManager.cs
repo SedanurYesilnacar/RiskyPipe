@@ -66,5 +66,6 @@
 
         public void EnergyIncrease() => EnergyIncreased?.Invoke();
 
+
     }
 }

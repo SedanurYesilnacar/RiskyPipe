@@ -45,6 +45,10 @@ namespace RiskyPipe3D.LevelDynamics
 
         public EnvironmentObject GetEnvironmentObject(EnvironmentType environmentType)
         {
+            if (environmentType.Equals(EnvironmentType.Trap))
+            {
+                environmentType = UnityEngine.Random.Range(0,2)==0?EnvironmentType.Trap:EnvironmentType.Trap2;
+            }
             if(_environmentPool.ContainsKey(environmentType) && _environmentPool[environmentType].Count > 0)
             {
                 return _environmentPool[environmentType].Dequeue();

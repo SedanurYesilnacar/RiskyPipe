@@ -8567,6 +8567,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7816975337441257293}
     m_Modifications:
+    - target: {fileID: 694463747376328575, guid: a18e5a5bab2413745bb717929223831c,
+        type: 3}
+      propertyPath: _multipier
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1881056006185264814, guid: a18e5a5bab2413745bb717929223831c,
         type: 3}
       propertyPath: m_Name
@@ -8672,6 +8677,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7816975337441257293}
     m_Modifications:
+    - target: {fileID: 694463747376328575, guid: a18e5a5bab2413745bb717929223831c,
+        type: 3}
+      propertyPath: _multipier
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1881056006185264814, guid: a18e5a5bab2413745bb717929223831c,
         type: 3}
       propertyPath: m_Name
@@ -8857,6 +8867,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7816975337441257293}
     m_Modifications:
+    - target: {fileID: 694463747376328575, guid: a18e5a5bab2413745bb717929223831c,
+        type: 3}
+      propertyPath: _multipier
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1881056006185264814, guid: a18e5a5bab2413745bb717929223831c,
         type: 3}
       propertyPath: m_Name
@@ -8972,6 +8987,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7816975337441257293}
     m_Modifications:
+    - target: {fileID: 694463747376328575, guid: a18e5a5bab2413745bb717929223831c,
+        type: 3}
+      propertyPath: _multipier
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1881056006185264814, guid: a18e5a5bab2413745bb717929223831c,
         type: 3}
       propertyPath: m_Name

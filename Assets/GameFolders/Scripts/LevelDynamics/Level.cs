@@ -30,13 +30,20 @@
         public Level(int level)
         {
             _level = level;
-            _lenght = CalculateLenght();
+            _lenght = CalculateLenght(level);
             _pipes = new List<BasePipe>();
             _pointPipes = new List<BasePipe>();
             _environments = new List<EnvironmentObject>();
             EventManager.Instance.ScoreIncreased += OnScoreIncreased;
             EventManager.Instance.ScoreResettt += ResetScore;
+            EventManager.Instance.MultipierSetted += OnMultipierSetted;
+           
+        }
 
+        private void OnMultipierSetted(int multipier)
+        {
+            _score *= multipier;
+            EventManager.Instance.ScoreChange(_score);
         }
 
         private void OnScoreIncreased()
@@ -52,9 +59,29 @@
         }
 
 
-        private int CalculateLenght()
+        private int CalculateLenght(int playerLevel)
         {
-            return 50;
+            int size = 30;
+            if (playerLevel<10)
+            {
+                size = Random.Range(20,30);
+            }else if (playerLevel < 20)
+            {
+                size = Random.Range(30, 40);
+            }
+            else if (playerLevel < 30)
+            {
+                size = Random.Range(40, 50);
+            }
+            else if (playerLevel < 50)
+            {
+                size = Random.Range(50, 60);
+            }
+            else
+            {
+                size = Random.Range(60, 100);
+            }
+            return size;
         }
 
         public void Initialize()
@@ -116,29 +143,37 @@
             while(currentIndex < _pipes.Count - 1)
             {
                 int lastIndex = _pipes.GetMidPipeIndex(currentIndex);
-                if(lastIndex == -1)
+                if(lastIndex <0)
                 {
                     break;
                 }
                 bool isEnergyPlaced = false;
-                for(int i = currentIndex; i < lastIndex; i++)
+                bool isOnTrap = false;
+                for(int i = currentIndex; i < lastIndex-1; i++)
                 {
-                    if(Random.Range(0,5) == 0)
+                    if (isOnTrap)
+                    {
+                        isOnTrap = false;
+                        continue;
+                    }
+                    if (Random.Range(0,2) == 0 && !isOnTrap)
                     {
                         Trap trap;
-                        trap = (Trap)EnvironmentFactory.Instance.GetEnvironmentObject(EnvironmentType.Trap);
+                        trap = (Trap)EnvironmentFactory.Instance.GetEnvironmentObject(Random.Range(0,2)==0?EnvironmentType.Trap:EnvironmentType.RingTrap);
                         trap.SetPosition(_pipes[i].EndPoint.position);
                         trap.SetRotation(_pipes[i].PipeType);
                         trap.SetScale();
                         _environments.Add(trap);
+                        isOnTrap = true;
                     }
+                    
                     if (!isEnergyPlaced)
                     {
                         Energy energy;
                         energy = (Energy)EnvironmentFactory.Instance.GetEnvironmentObject(EnvironmentType.Energy);
                         energy.SetPosition(_pipes[i].EndPoint.position);
                         energy.SetRotation(_pipes[i].PipeType);
-                        energy.SetScale(lastIndex - i);
+                        energy.SetScale(lastIndex - i-1);
                         _environments.Add(energy);
                         isEnergyPlaced = true;
                     }

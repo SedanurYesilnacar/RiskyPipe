@@ -6,13 +6,10 @@ using UnityEngine;
 
 namespace RiskyPipe3D.LevelDynamics
 {
-public class Trap : EnvironmentObject
+public abstract class Trap : EnvironmentObject
     {
-        public void SetScale()
-        {
-            float scale = Random.Range(2, 7);
-            transform.localScale = new Vector3(scale, scale, transform.localScale.z);
-        }
+        public abstract void SetScale();
+        
 
         private void OnCollisionEnter(Collision collision)
         {
