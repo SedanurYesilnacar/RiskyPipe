@@ -6,7 +6,7 @@
 
     public class MechanicChanger : MonoBehaviour
     {
-        [SerializeField] private ScaleMechanic _mechanic;
+        [SerializeField] private ScaleMechanic _mechanic= ScaleMechanic.None;
 
         private void OnTriggerEnter(Collider other)
         {

@@ -11,7 +11,7 @@ namespace RiskyPipe3D.UIs
 
     public class LevelText : MonoBehaviour
     {
-        [SerializeField] private Text _textLevel;
+        [SerializeField] private Text _textLevel=null;
 
         private void Awake()
         {

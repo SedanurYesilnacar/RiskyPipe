@@ -19,7 +19,7 @@ public class FileManager
 
     public void SavePlayer(PlayerView playerView)
     {
-        Player p = new Player();
+        PlayerData p = new PlayerData();
         p.highScore = playerView.HighScore;
         p.level = playerView.Level;
         p.totalCoin = playerView.TotalCoin;
@@ -32,11 +32,11 @@ public class FileManager
         PlayerView pView = null;
         if (PlayerPrefs.HasKey("Player"))
         {
-            pView = new PlayerView(JsonUtility.FromJson<Player>(PlayerPrefs.GetString("Player")));
+            pView = new PlayerView(JsonUtility.FromJson<PlayerData>(PlayerPrefs.GetString("Player")));
         }
         else
         {
-            Player player = new Player() { highScore = 0, level = 1, totalCoin = 0, defaultSpeed = 4 };
+            PlayerData player = new PlayerData() { highScore = 0, level = 1, totalCoin = 0, defaultSpeed = 4 };
             pView = new PlayerView(player);
             SavePlayer(pView);
         }

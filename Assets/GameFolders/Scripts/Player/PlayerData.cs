@@ -1,6 +1,6 @@
 ﻿namespace RiskyPipe3D
 {
-    public class Player
+    public class PlayerData
     {
         public int level;
         public int totalCoin;

@@ -69,7 +69,7 @@
         public delegate void SpeedChange(float defaultSpeed);
         public event SpeedChange SpeedChanged;
 
-        public PlayerView(Player player)
+        public PlayerView(PlayerData player)
         {
             _totalCoin = player.totalCoin;
             _level = player.level;

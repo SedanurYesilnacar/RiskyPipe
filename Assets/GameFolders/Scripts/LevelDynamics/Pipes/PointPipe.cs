@@ -11,7 +11,6 @@
             {
                 EventManager.Instance.GameStateChange(Enums.GameState.Win);
                 EventManager.Instance.MultipierSet(_multipier);
-                Debug.Log("1");
             }
         }
     }

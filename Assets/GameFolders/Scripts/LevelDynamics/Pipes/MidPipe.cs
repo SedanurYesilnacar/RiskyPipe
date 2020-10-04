@@ -7,7 +7,7 @@
 
     public class MidPipe :Pipe
     {
-        [SerializeField] private Transform centerObj;
+        [SerializeField] private Transform centerObj=null;
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))

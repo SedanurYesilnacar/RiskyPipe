@@ -6,10 +6,10 @@
     public class BasePipe : MonoBehaviour
     {
 
-        [SerializeField] private PipeType _pipeType;
+        [SerializeField] private PipeType _pipeType=PipeType.PointPipe;
         public PipeType PipeType { get => _pipeType; }
 
-        [SerializeField] private Transform _endPoint;
+        [SerializeField] private Transform _endPoint=null;
         public Transform EndPoint { get => _endPoint; }
 
 

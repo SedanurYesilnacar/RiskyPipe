@@ -6,7 +6,7 @@ namespace RiskyPipe3D.LevelDynamics
 {
     public class EnvironmentObject : MonoBehaviour
     {
-        [SerializeField] private EnvironmentType _environmentType;
+        [SerializeField] private EnvironmentType _environmentType= EnvironmentType.Energy;
 
         public EnvironmentType EnvironmentType { get => _environmentType; }
         public void SetPosition(Vector3 position)

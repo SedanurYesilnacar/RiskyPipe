@@ -10,10 +10,10 @@ namespace RiskyPipe3D.UIs
     public class EnergySystem : MonoBehaviour
     {
 
-        [SerializeField] private RectTransform _energyFrontImage;
-        [SerializeField] private float _energySpeed;
+        [SerializeField] private RectTransform _energyFrontImage=null;
+        [SerializeField] private float _energySpeed=0;
         private bool _isPlaying = false;
-        private Vector3 _defaultVector;
+        private Vector3 _defaultVector=Vector3.zero;
 
 
         private void Awake()

@@ -10,8 +10,8 @@ namespace RiskyPipe3D
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance;
-        [SerializeField] private Color[] _pipeColors;
-        [SerializeField] private Material _pipeMaterial;
+        [SerializeField] private Color[] _pipeColors=null;
+        [SerializeField] private Material _pipeMaterial=null;
         public bool _isRestaring = false;
 
 
