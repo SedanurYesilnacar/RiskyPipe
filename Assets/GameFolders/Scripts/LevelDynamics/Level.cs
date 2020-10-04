@@ -43,6 +43,8 @@
         private void OnMultipierSetted(int multipier)
         {
             _score *= multipier;
+            if (_score > Game.Instance.GetPlayer().HighScore)
+                Game.Instance.GetPlayer().HighScore = _score;
             EventManager.Instance.ScoreChange(_score);
         }
 
@@ -134,6 +136,9 @@
                 environmentObject.Deactive();
                 EventManager.Instance.EnvironmentObjectDeactivate(environmentObject);
             }
+            EventManager.Instance.ScoreIncreased -= OnScoreIncreased;
+            EventManager.Instance.ScoreResettt -= ResetScore;
+            EventManager.Instance.MultipierSetted -= OnMultipierSetted;
         }
 
 
@@ -159,7 +164,7 @@
                     if (Random.Range(0,2) == 0 && !isOnTrap)
                     {
                         Trap trap;
-                        trap = (Trap)EnvironmentFactory.Instance.GetEnvironmentObject(Random.Range(0,2)==0?EnvironmentType.Trap:EnvironmentType.RingTrap);
+                        trap = (Trap)EnvironmentFactory.Instance.GetEnvironmentObject(Random.Range(0,3)==0?EnvironmentType.RingTrap:EnvironmentType.Trap);
                         trap.SetPosition(_pipes[i].EndPoint.position);
                         trap.SetRotation(_pipes[i].PipeType);
                         trap.SetScale();

@@ -10,11 +10,24 @@
     public class TxtScore : MonoBehaviour
     {
         private Text _txtScore;
+        private int totalScore;
         void Awake()
         {
             _txtScore = GetComponent<Text>();
-            EventManager.Instance.ScoreChanged += OnScoreChanged;
+            EventManager.Instance.ScoreIncreased += OnScoreIncreased;
             EventManager.Instance.GameStateChanged += OnGameStateChanged;
+            EventManager.Instance.MultipierSetted += OnMultipierSetted;
+        }
+
+        private void OnScoreIncreased()
+        {
+            this.totalScore++;
+            _txtScore.text = totalScore.ToString();
+        }
+
+        private void OnMultipierSetted(int multipier)
+        {
+            _txtScore.text = multipier + " x " + totalScore + " = " + (totalScore * multipier);
         }
 
         private void OnGameStateChanged(GameState gameState)
@@ -26,16 +39,12 @@
             
             }else if (gameState.Equals(GameState.Restart) || gameState.Equals(GameState.NextStage))
             {
-                OnScoreChanged(0);
+                totalScore = -1;
+                OnScoreIncreased();
                 EventManager.Instance.ScoreReset();
             }
             else
                 gameObject.SetActive(false);
-        }
-
-        private void OnScoreChanged(int totalScore)
-        {
-            _txtScore.text = totalScore.ToString();
         }
     }
 }
